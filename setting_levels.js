@@ -2,8 +2,8 @@
 
 function setLevel1Walls() {
     //grey area around maze
-    for (var i = 0; i < 26; i++) {
-        for (var j = 0; j < 13; j++) {
+    for (var i = 0; i < 17; i++) {
+        for (var j = 0; j < 12; j++) {
             //Setting actual walls
             if (i >= 2 && i < 16 && j >= 1 && j < 11) {
                 tiles[i][j].wall = false;
@@ -39,6 +39,7 @@ function setLevel1SafeArea() {
     tiles[4][1].goal = true;
     tiles[4][2].goal = true;
     tiles[4][3].goal = true;
+    //tiles[1][1].goal = true;
 
 }
 
@@ -109,7 +110,7 @@ function setEdges() {
 
 
     // The outer walls.
-    for (var i = 0; i < 23; i++) {
+    for (var i = 0; i < 16; i++) {
         for (var j = 0; j < 11; j++) {
             console.log('i: ' + i + ' j: ' + j)
             if (!tiles[i][j].wall) {
@@ -144,12 +145,12 @@ function setEdges() {
  */
 
 function setSolids() {
-    solids.push(new Solid(tiles[2][1], tiles[2][9]));  // Left boundary.
+    solids.push(new Solid(tiles[2][1], tiles[2][10]));  // Left boundary.
     solids.push(new Solid(tiles[1][1], tiles[20][1]));  // Top boundary.
     solids.push(new Solid(tiles[1][9], tiles[20][9]));  // Bottom boundary.
     solids.push(new Solid(tiles[20][1], tiles[20][9]));  // Right boundary.
     // The vertical inner maze walls.
-    solids.push(new Solid(tiles[4][1], tiles[4][3]));
+   /*  solids.push(new Solid(tiles[4][1], tiles[4][3]));
     solids.push(new Solid(tiles[5][3], tiles[5][4]));
     solids.push(new Solid(tiles[7][1], tiles[7][2]));
     solids.push(new Solid(tiles[9][1], tiles[9][2]));
@@ -170,7 +171,7 @@ function setSolids() {
     solids.push(new Solid(tiles[2][5], tiles[5][5]));
     solids.push(new Solid(tiles[7][5], tiles[10][5]));
     solids.push(new Solid(tiles[13][6], tiles[17][6]));
-    solids.push(new Solid(tiles[2][7], tiles[17][7]));
+    solids.push(new Solid(tiles[2][7], tiles[17][7])); */
 }
   //functions which setup the level
 

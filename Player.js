@@ -17,7 +17,7 @@ class Player{
       this.nodes = [];
       this.fading = false;
       //this.brain = new Brain(numberOfSteps);
-      this.human = false;
+      this.human = true;
       //this.setNodes();
   
     }
@@ -57,8 +57,8 @@ class Player{
         } */
       }
    
-    /* move(){
-      if (!humanPlaying){
+    move(){
+     /*  if (!humanPlaying){
         if (this.moveCount == 0) {//move in the direction for 6 frames
           if (this.brain.directions.length > this.brain.step) {//if there are still directions left then set the velocity as the next PVector in the direcitons array
             this.vel = this.brain.directions[this.brain.step];
@@ -71,8 +71,10 @@ class Player{
         } else {
           this.moveCount--;
         }
-      }
+      } */
+
       var temp = createVector(this.vel.x, this.vel.y);
+      
       temp.normalize();
       temp.mult(this.playerSpeed);
       for (var i = 0; i< solids.length; i++) {
@@ -80,7 +82,7 @@ class Player{
       }
       this.pos.add(temp);
   
-    } */
+    }
   
     //checks if the player
   /* checkCollisions() {
@@ -100,10 +102,10 @@ class Player{
     }
   } */
   //----------------------------------------------------------------------------------------------------------------------------------------------------------
-  /*  update() {
+   update() {
     if (!this.dead && !this.reachedGoal) {
       this.move();
-      this.checkCollisions();
+      //this.checkCollisions();
     } else if (this.fading) {
       if (this.fadeCounter > 0) {
         if(humanPlaying || replayGens){
@@ -114,7 +116,7 @@ class Player{
       }
       }
     }
-  } */
+  }
   //----------------------------------------------------------------------------------------------------------------------------------------------------------
   
    /* calculateFitness() {

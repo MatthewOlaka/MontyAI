@@ -3,6 +3,12 @@ let movingLeft = false;
 let movingUp = false;
 let movingDown = false;
 
+var left = false;
+var right = false;
+var up = false;
+var down = false;
+var p;
+
 var tileSize = 50;
 var xoff = 145;
 var yoff = 100;
@@ -14,7 +20,7 @@ var winCounter = -1;
 
 let xpos = 300;
 let ypos = 300;
-let speed = 10;
+//let speed = 10;
 
 var p;
 
@@ -48,6 +54,7 @@ function setup() {
     setSolids();
 
     p = new Player();
+    //p.human = true;
     
 
     
@@ -77,9 +84,14 @@ function draw() {
     background(180, 181, 254);
     drawTiles();
 
-    p = new Player();
-    p.human = true;
+    //p = new Player();
+    //p.human = true;
+   
+    p.update();
     p.show();
+    
+
+   // setPlayerVelocity();
 
 
     /* if (humanPlaying) {//if the user is controlling the square
@@ -108,7 +120,7 @@ function draw() {
     // drawTiles();
 
 
-    // update moving character
+   /*  // update moving character
     if (movingRight) {
         p.xpos += speed;
     }
@@ -120,7 +132,7 @@ function draw() {
     }
     if (movingDown) {
         p.ypos += speed;
-    }
+    } */
 
 }
 
@@ -238,7 +250,7 @@ function keyReleased() {
 
 } */
 function keyPressed(){
-    //if(humanPlaying){
+    if(humanPlaying){
       switch(keyCode) {
       case UP_ARROW:
         up = true;
@@ -268,10 +280,10 @@ function keyPressed(){
           break;
       }
       setPlayerVelocity();
-    //}
+    }
 }
 function keyReleased(){
-   // if(humanPlaying){
+    if(humanPlaying){
       switch(keyCode) {
       case UP_ARROW:
         up = false;
@@ -302,7 +314,7 @@ function keyReleased(){
       }
   
       setPlayerVelocity();
-   // }
+    }
   
   }
   //set the velocity of the player based on what keys are currently down

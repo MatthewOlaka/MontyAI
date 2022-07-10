@@ -12,11 +12,11 @@ class Tile{
   
      show(){
        if ((this.matrixPos.x +this.matrixPos.y) % 2 ==0) {
-        //fill(247,247,255); //Checkerboard 1
-        fill(250,250,242);
+        fill(247,247,255); //Checkerboard 1
+        //fill(250,250,242);
       } else {
-        //fill(230,230,255); //Checkerboard 2
-        fill(250,250,242);
+        fill(230,230,255); //Checkerboard 2
+        //fill(250,250,242);
         
       }
       if (this.wall) {

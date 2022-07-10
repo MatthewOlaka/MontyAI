@@ -136,13 +136,14 @@ function setEdges() {
 }
 
 
-/* function setDots() {
- dots.push(new Dot(tiles[2][5], tiles[10][5], 0.6));
- dots.push(new Dot(tiles[4][2], tiles[15][2], 1));
- // dots.push(new Dot(tiles[12][4], tiles[19][4], 0.3));
- dots.push(new Dot(tiles[19][5], tiles[12][5], -0.3));
+function setDots() {
+  dots.push(new Dot(tiles[5][1], tiles[5][4], 0, 0.6));
+  dots.push(new Dot(tiles[6][4], tiles[6][1], 0, -0.6));
+  dots.push(new Dot(tiles[8][5], tiles[8][8], 0, 0.6));
+  dots.push(new Dot(tiles[2][10], tiles[12][10], 2));
+  dots.push(new Dot(tiles[11][7], tiles[15][7], 0.6));
 }
- */
+
 
 function setSolids() {
     solids.push(new Solid(tiles[2][1], tiles[2][11]));  // Left boundary.

@@ -1,11 +1,11 @@
 class Dot {
 
-    constructor( t1, t2, velX) {
+    constructor( t1, t2, velX,velY) {
       this.position = createVector(t1.pixelPos.x + tileSize/2, t1.pixelPos.y + tileSize/2);
       this.startingPos = createVector(t1.pixelPos.x + tileSize/2, t1.pixelPos.y + tileSize/2);
       this.speed = floor(tileSize/6.6);
-      this.velocity = createVector(velX*this.speed, 0);
-      this.startingVel = createVector(velX*this.speed, 0);
+      this.velocity = createVector(velX*this.speed, velY*this.speed);
+      this.startingVel = createVector(velX*this.speed, velY*this.speed);
       this.bouncers = [];
       this.bouncers[0] = t1;
       this.bouncers[1] = t2;
@@ -26,7 +26,9 @@ class Dot {
       }
       if (this.bounceWait ==0) {
         //change direction
+        this.velocity.y *= -1;
         this.velocity.x *= -1;
+  
       }
   
       this.position.add(this.velocity);//move dot
@@ -37,7 +39,7 @@ class Dot {
     //------------------------------------------------------------------------------------------------------------
     //draws the dot
     show() {
-      fill(100,100,100);
+      fill(100, 100, 100);
       stroke(0);
       strokeWeight(4);
       ellipse(this.position.x, this.position.y, this.diameter, this.diameter);
@@ -71,7 +73,7 @@ class Dot {
     //------------------------------------------------------------------------------------------------------------
     //returns a copy of this dot object
     clone() {
-      var clone = new Dot(this.bouncers[0], this.bouncers[1], floor(this.velocity.x));
+      var clone = new Dot(this.bouncers[0], this.bouncers[1], floor(this.velocity.x), floor(this.velocity.y));
       clone.velocity = this.velocity.copy();
       clone.position = this.position.copy();
       clone.startingVel = this.startingVel.copy();

@@ -85,22 +85,22 @@ class Player{
     }
   
     //checks if the player
-  /* checkCollisions() {
+  checkCollisions() {
     for (var i = 0; i< dots.length; i++) {
       if (dots[i].collides(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
         this.fading = true;
         this.dead = true;
         this.deathByDot = true;
-        this.deathAtStep = this.brain.step;
+        //this.deathAtStep = this.brain.step;
       }
     }
     if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
       this.reachedGoal = true;
     }
-    for (var i = 0; i< this.nodes.length; i++) {
+   /*  for (var i = 0; i< this.nodes.length; i++) {
       this.nodes[i].collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size));
-    }
-  } */
+    } */
+  }
   //----------------------------------------------------------------------------------------------------------------------------------------------------------
    update() {
     if (!this.dead && !this.reachedGoal) {

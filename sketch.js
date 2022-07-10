@@ -31,6 +31,7 @@ var stage = 0;
 var tiles = [];
 var solids = [];
 var dots = [];
+var savedDots = [];
 
 function setup() {
     var canvas = createCanvas(2000, 2000);
@@ -54,6 +55,8 @@ function setup() {
     setSolids();
 
     p = new Player();
+
+    setDots();
     //p.human = true;
     
 
@@ -86,6 +89,8 @@ function draw() {
 
     //p = new Player();
     //p.human = true;
+
+    moveAndShowDots();
    
     p.update();
     p.show();
@@ -162,6 +167,33 @@ function drawTiles() {
         }
     }
 }
+
+function moveAndShowDots(){
+    for (var i = 0; i < dots.length; i ++) {
+      dots[i].move();
+      dots[i].show();
+    }
+  
+  }
+  function resetDots(){
+    for (var i = 0; i < dots.length; i ++) {
+      dots[i].resetDot();
+    }
+  
+  }
+  
+  function loadDots(){
+    for (var i = 0; i< dots.length; i++) {
+      dots[i] = savedDots[i].clone();
+    }
+  }
+  
+  function saveDots(){
+    for (var i = 0; i< dots.length; i++) {
+      savedDots[i] = dots[i].clone();
+    }
+  }
+  
 
 /* function keyPressed() {
     if (key == 'w') {
@@ -249,6 +281,7 @@ function keyReleased() {
     }
 
 } */
+
 function keyPressed(){
     if(humanPlaying){
       switch(keyCode) {

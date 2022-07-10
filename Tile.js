@@ -12,15 +12,18 @@ class Tile{
   
      show(){
        if ((this.matrixPos.x +this.matrixPos.y) % 2 ==0) {
-        fill(247,247,255);
+        //fill(247,247,255); //Checkerboard 1
+        fill(250,250,242);
       } else {
-        fill(230,230,255);
+        //fill(230,230,255); //Checkerboard 2
+        fill(250,250,242);
+        
       }
       if (this.wall) {
         fill(221,221,221);
       }
       if (this.goal || this.safe) {
-        fill(181, 254, 180);
+        fill(73,239,144);
       }
       noStroke();
       rect(this.pixelPos.x,this.pixelPos.y,tileSize,tileSize);

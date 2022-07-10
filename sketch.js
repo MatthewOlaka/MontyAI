@@ -10,8 +10,8 @@ var down = false;
 var p;
 
 var tileSize = 50;
-var xoff = 145;
-var yoff = 100;
+var xoff = 300;
+var yoff = 150;
 
 var humanPlaying = true;
 
@@ -81,7 +81,7 @@ function draw() {
          game();
          
      } */
-    background(180, 181, 254);
+    background(32,89,155);
     drawTiles();
 
     //p = new Player();

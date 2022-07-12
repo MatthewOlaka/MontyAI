@@ -18,11 +18,14 @@ var humanPlaying = true;
 var winArea;
 var winCounter = -1;
 
+var img;
+var flip = true;
+
 let xpos = 300;
 let ypos = 300;
 //let speed = 10;
 
-var p;
+
 
 //stage i.e player alive, dead, completed level etc
 var stage = 0;
@@ -52,6 +55,7 @@ function setup() {
     setLevel1SafeArea();
     setEdges();
     // setMazeWalls();
+    setSpikes();
     setSolids();
 
     p = new Player();
@@ -94,6 +98,8 @@ function draw() {
    
     p.update();
     p.show();
+
+    //console.log(p.dead);
     
 
    // setPlayerVelocity();
@@ -164,6 +170,11 @@ function drawTiles() {
     for (var i = 0; i < tiles.length; i++) {
         for (var j = 0; j < tiles[0].length; j++) {
             tiles[i][j].showEdges();
+        }
+    }
+    for (var i = 0; i < tiles.length; i++) {
+        for (var j = 0; j < tiles[0].length; j++) {
+            tiles[i][j].showSpikes();
         }
     }
 }

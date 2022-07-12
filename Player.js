@@ -12,7 +12,7 @@ class Player{
       this.deathByDot = false;
       this.deathAtStep = 0;
       this.moveCount = 0;
-      this.gen =1;
+      this.gen = 1;
       this.fitness = 0;
       this.nodes = [];
       this.fading = false;
@@ -41,7 +41,7 @@ class Player{
   
     show(){
         //fill(230, 230, 255, this.fadeCounter);
-        fill(33,93,159);
+        fill(33,93,159,this.fadeCounter);
 
 
         /* if (this.isBest && !showBest) {
@@ -94,9 +94,9 @@ class Player{
         //this.deathAtStep = this.brain.step;
       }
     }
-    if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
+    /* if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
       this.reachedGoal = true;
-    }
+    } */
    /*  for (var i = 0; i< this.nodes.length; i++) {
       this.nodes[i].collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size));
     } */
@@ -105,7 +105,7 @@ class Player{
    update() {
     if (!this.dead && !this.reachedGoal) {
       this.move();
-      //this.checkCollisions();
+      this.checkCollisions();
     } else if (this.fading) {
       if (this.fadeCounter > 0) {
         if(humanPlaying || replayGens){

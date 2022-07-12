@@ -1,56 +1,96 @@
-class Tile{
+class Tile {
 
-    constructor(x,y){
-      this.matrixPos = createVector(x,y);
-      this.pixelPos = createVector(x*tileSize+xoff, y*tileSize+yoff);
-      this.safe = false;
-      this.goal = false;
-      this.wall = false;
-      this.edges = [];
-  
-    }
-  
-     show(){
-       if ((this.matrixPos.x +this.matrixPos.y) % 2 ==0) {
-        fill(247,247,255); //Checkerboard 1
-        //fill(250,250,242);
-      } else {
-        fill(230,230,255); //Checkerboard 2
-        //fill(250,250,242);
-        
-      }
-      if (this.wall) {
-        fill(221,221,221);
-      }
-      if (this.goal || this.safe) {
-        fill(73,239,144);
-      }
-      noStroke();
-      rect(this.pixelPos.x,this.pixelPos.y,tileSize,tileSize);
-  
-    }
-  
-    showEdges(){
-      for (var i = 0; i< this.edges.length; i++) {
-        stroke(0);
-        strokeWeight(4);
-        switch(this.edges[i]) {
-          case 4:
-            line(this.pixelPos.x, this.pixelPos.y, this.pixelPos.x+tileSize,this.pixelPos.y);
-            break;
-          case 1:
-            line(this.pixelPos.x+tileSize, this.pixelPos.y, this.pixelPos.x+tileSize, this.pixelPos.y+tileSize);
-            break;
-          case 2:
-            line(this.pixelPos.x, this.pixelPos.y+tileSize, this.pixelPos.x+tileSize, this.pixelPos.y+tileSize);
-            break;
-          case 3:
-            line(this.pixelPos.x, this.pixelPos.y, this.pixelPos.x, this.pixelPos.y+tileSize);
-            break;
-        }
-      }
-    }
-  
-  
-  
+  constructor(x, y) {
+    this.matrixPos = createVector(x, y);
+    this.pixelPos = createVector(x * tileSize + xoff, y * tileSize + yoff);
+    this.safe = false;
+    this.goal = false;
+    this.wall = false;
+    this.edges = [];
+    this.spikes = [];
+
   }
+
+  show() {
+    if ((this.matrixPos.x + this.matrixPos.y) % 2 == 0) {
+      fill(247, 247, 255); //Checkerboard 1
+      //fill(250,250,242);
+    } else {
+      fill(230, 230, 255); //Checkerboard 2
+      //fill(250,250,242);
+
+    }
+    if (this.wall) {
+      fill(221, 221, 221);
+    }
+    if (this.goal || this.safe) {
+      fill(73, 239, 144);
+
+    }
+    /* if (this.spikes) {
+      fill(110, 221, 300);
+      triangle(0, 0, 50, 0, 25, 25);
+      
+
+    } */
+
+
+    noStroke();
+    rect(this.pixelPos.x, this.pixelPos.y, tileSize, tileSize);
+
+  }
+
+  showEdges() {
+    for (var i = 0; i < this.edges.length; i++) {
+      stroke(0);
+      strokeWeight(6);
+      switch (this.edges[i]) {
+        case 4:
+          line(this.pixelPos.x, this.pixelPos.y, this.pixelPos.x + tileSize, this.pixelPos.y);
+          break;
+        case 1:
+          line(this.pixelPos.x + tileSize, this.pixelPos.y, this.pixelPos.x + tileSize, this.pixelPos.y + tileSize);
+          break;
+        case 2:
+          line(this.pixelPos.x, this.pixelPos.y + tileSize, this.pixelPos.x + tileSize, this.pixelPos.y + tileSize);
+          break;
+        case 3:
+          line(this.pixelPos.x, this.pixelPos.y, this.pixelPos.x, this.pixelPos.y + tileSize);
+          break;
+      }
+    }
+  }
+
+  showSpikes() {
+
+
+    for (var i = 0; i < this.spikes.length; i++) {
+      stroke(0);
+      strokeWeight(2);
+      //triangle(0, 0, 50, 0, 25, 25);
+      //fill(221, 221, 221);
+      switch (this.spikes[i]) {
+        case 4:
+          line(this.pixelPos.x, this.pixelPos.y, this.pixelPos.x + tileSize, this.pixelPos.y);
+          break;
+        case 1:
+          line(this.pixelPos.x + tileSize, this.pixelPos.y, this.pixelPos.x + tileSize, this.pixelPos.y + tileSize);
+          break;
+        case 2:
+          //line(this.pixelPos.x, this.pixelPos.y + tileSize, this.pixelPos.x + tileSize, this.pixelPos.y + tileSize);
+          triangle(this.pixelPos.x+tileSize/8, this.matrixPos.y*114, this.pixelPos.x,this.pixelPos.y + tileSize, this.pixelPos.x + tileSize/4,this.pixelPos.y + tileSize);
+          triangle(this.pixelPos.x+tileSize/2.7, this.matrixPos.y*114, this.pixelPos.x + tileSize/2, this.pixelPos.y + tileSize, this.pixelPos.x + tileSize/3.9,this.pixelPos.y + tileSize);
+          triangle(this.pixelPos.x+tileSize/1.7, this.matrixPos.y*114, this.pixelPos.x + tileSize/1.35, this.pixelPos.y + tileSize, this.pixelPos.x + tileSize/2.1,this.pixelPos.y + tileSize);
+          triangle(this.pixelPos.x+tileSize/1.2, this.matrixPos.y*114, this.pixelPos.x + tileSize, this.pixelPos.y + tileSize, this.pixelPos.x + tileSize/1.4,this.pixelPos.y + tileSize);
+          break;
+        case 3:
+          line(this.pixelPos.x, this.pixelPos.y, this.pixelPos.x, this.pixelPos.y + tileSize);
+          break;
+      }
+    }
+
+  }
+
+
+
+}

@@ -45,14 +45,17 @@ function setLevel1SafeArea() {
 }
 
 function setSpikes() { 
-  tiles[6][7].spikes.push(2);
-  tiles[7][7].spikes.push(2);
-  tiles[7][7].spikes.push(1);
-  tiles[7][6].spikes.push(1);
-  tiles[7][5].spikes.push(1);
-  tiles[7][5].spikes.push(4);
-  tiles[6][5].spikes.push(4);
-  tiles[5][5].spikes.push(4);
+  //tiles[6][7].spikes.push(2);
+  //tiles[7][7].spikes.push(2);
+  //tiles[7][7].spikes.push(1);
+  //tiles[7][6].spikes.push(1);
+  //tiles[7][5].spikes.push(1);
+  //tiles[7][5].spikes.push(4);
+  //tiles[6][5].spikes.push(4);
+  //tiles[5][5].spikes.push(4);
+  tiles[5][4].spikes.push(3);
+  //tiles[6][4].spikes.push(2);
+  //tiles[5][4].spikes.push(2);
   tiles[4][4].spikes.push(1);
   tiles[2][4].spikes.push(4);
   tiles[3][4].spikes.push(4);
@@ -62,14 +65,32 @@ function setSpikes() {
   tiles[2][6].spikes.push(3);
   tiles[2][6].spikes.push(2);
   tiles[3][6].spikes.push(2);
+  tiles[2][7].spikes.push(4);
+  tiles[3][7].spikes.push(4);
 
   tiles[9][1].spikes.push(1);
   tiles[9][2].spikes.push(1);
 
   tiles[11][5].spikes.push(4);
+  tiles[11][4].spikes.push(2);
   tiles[13][5].spikes.push(4);
   tiles[14][5].spikes.push(4);
   tiles[15][5].spikes.push(4);
+
+  tiles[2][10].spikes.push(2);
+  tiles[3][10].spikes.push(2);
+  tiles[4][10].spikes.push(2);
+  tiles[5][10].spikes.push(2);
+  tiles[6][10].spikes.push(2);
+  tiles[7][10].spikes.push(2);
+  tiles[8][10].spikes.push(2);
+  tiles[9][10].spikes.push(2);
+  tiles[10][10].spikes.push(2);
+  tiles[11][10].spikes.push(2);
+  tiles[12][10].spikes.push(2);
+
+
+
 }
 
 function setEdges() {
@@ -179,34 +200,54 @@ function setDots() {
 
 
 function setSolids() {
-  solids.push(new Solid(tiles[2][1], tiles[2][11]));  // Left boundary.
+  //solids.push(new Solid(tiles[2][1], tiles[2][11])); 
+  solids.push(new Solid(tiles[2][1], tiles[2][4])); 
+  solids.push(new Solid(tiles[2][7], tiles[2][11]));  // Left boundary.
   solids.push(new Solid(tiles[2][1], tiles[16][1]));  // Top boundary.
-  solids.push(new Solid(tiles[1][11], tiles[16][11]));  // Bottom boundary.
+  solids.push(new Solid(tiles[13][11], tiles[16][11]));  // Bottom boundary.
   solids.push(new Solid(tiles[16][1], tiles[16][11]));  // Right boundary.
+
   // The vertical inner maze walls.
-  solids.push(new Solid(tiles[10][1], tiles[10][3]));
+ // solids.push(new Solid(tiles[10][1], tiles[10][3]));
   solids.push(new Solid(tiles[8][3], tiles[8][4]));
   solids.push(new Solid(tiles[13][3], tiles[13][5]));
-  solids.push(new Solid(tiles[5][4], tiles[5][5]));
+  //solids.push(new Solid(tiles[5][4], tiles[5][5]));
   solids.push(new Solid(tiles[11][4], tiles[11][9]));
   solids.push(new Solid(tiles[8][5], tiles[8][8]));
   solids.push(new Solid(tiles[13][8], tiles[13][11]));
   solids.push(new Solid(tiles[6][8], tiles[6][10]));
   //solids.push(new Solid(tiles[13][3], tiles[13][4]));
   //solids.push(new Solid(tiles[15][1], tiles[15][2]));
+
   // The horizontal inner maze walls.
-  solids.push(new Solid(tiles[2][4], tiles[5][4]));
+  //solids.push(new Solid(tiles[2][4], tiles[5][4]));
   solids.push(new Solid(tiles[5][5], tiles[9][5]));
   solids.push(new Solid(tiles[8][3], tiles[13][3]));
   solids.push(new Solid(tiles[8][4], tiles[11][4]));
-  solids.push(new Solid(tiles[11][5], tiles[12][5]));
-  solids.push(new Solid(tiles[13][5], tiles[16][5]));
-  solids.push(new Solid(tiles[2][7], tiles[4][7]));
+  //solids.push(new Solid(tiles[11][5], tiles[12][5]));
+  //solids.push(new Solid(tiles[13][5], tiles[16][5]));
+  //solids.push(new Solid(tiles[2][7], tiles[4][7]));
   solids.push(new Solid(tiles[6][8], tiles[8][8]));
   solids.push(new Solid(tiles[13][8], tiles[14][8]));
   solids.push(new Solid(tiles[7][9], tiles[11][9]));
   solids.push(new Solid(tiles[6][10], tiles[11][10]));
   //solids.push(new Solid(tiles[7][5], tiles[10][5]));
   //solids.push(new Solid(tiles[2][7], tiles[17][7]));
-
 } 
+
+function setKillWalls() {
+  
+  //Vertical Walls
+  spikes.push(new Spikes(tiles[10][1], tiles[10][3]));
+  spikes.push(new Spikes(tiles[5][4], tiles[5][5]));
+  spikes.push(new Spikes(tiles[2][4], tiles[2][7])); 
+
+  //Horizontal Walls
+  spikes.push(new Spikes(tiles[2][7], tiles[4][7]));
+  spikes.push(new Spikes(tiles[11][5], tiles[12][5]));
+  spikes.push(new Spikes(tiles[13][5], tiles[16][5]));
+  spikes.push(new Spikes(tiles[2][11], tiles[13][11]));
+
+
+
+}

@@ -35,6 +35,7 @@ var tiles = [];
 var solids = [];
 var dots = [];
 var savedDots = [];
+var spikes = [];
 
 function setup() {
     var canvas = createCanvas(2000, 2000);
@@ -54,7 +55,7 @@ function setup() {
     setLevel1Goal();
     setLevel1SafeArea();
     setEdges();
-    // setMazeWalls();
+    setKillWalls();
     setSpikes();
     setSolids();
 
@@ -127,23 +128,7 @@ function draw() {
         }
  */
       
-     
-    // drawTiles();
 
-
-   /*  // update moving character
-    if (movingRight) {
-        p.xpos += speed;
-    }
-    if (movingLeft) {
-        p.xpos -= speed;
-    }
-    if (movingUp) {
-        p.ypos -= speed;
-    }
-    if (movingDown) {
-        p.ypos += speed;
-    } */
 
 }
 
@@ -205,93 +190,6 @@ function moveAndShowDots(){
     }
   }
   
-
-/* function keyPressed() {
-    if (key == 'w') {
-        movingUp = true;
-
-    }
-    else if (key == 'a') {
-        movingLeft = true;
-    }
-    else if (key == 's') {
-        movingDown = true;
-    }
-    else if (key == 'd') {
-        movingRight = true;
-    }
-    else if (keyCode == UP_ARROW) {
-        movingUp = true;
-    }
-    else if (keyCode == LEFT_ARROW) {
-        movingLeft = true;
-    }
-    else if (keyCode == DOWN_ARROW) {
-        movingDown = true;
-    }
-    else if (keyCode == RIGHT_ARROW) {
-        movingRight = true;
-    }
-
-    if (movingRight) {
-        xpos += speed;
-    }
-    if (movingLeft) {
-        xpos -= speed;
-    }
-    if (movingUp) {
-        ypos -= speed;
-    }
-    if (movingDown) {
-        ypos += speed;
-    }
-
-     if (humanPlaying) {//if human is currently playing
-
-        //reset dots to position
-        humanPlaying = false;
-        //loadDots();
-      } else {//if AI is currently playing
-        if (replayGens) {
-          upToGenPos = 0;
-          replayGens = false;
-        }
-        humanPlaying = true;
-        p = new Player();
-        p.human = true;
-        //save the positions of the dots
-        //saveDots();
-        //resetDots();
-      } 
-}
-
-function keyReleased() {
-    if (key == 'w') {
-        movingUp = false;
-    }
-    else if (key == 'a') {
-        movingLeft = false;
-    }
-    else if (key == 's') {
-        movingDown = false;
-    }
-    else if (key == 'd') {
-        movingRight = false;
-    }
-    else if (keyCode == UP_ARROW) {
-        movingUp = false;
-    }
-    else if (keyCode == LEFT_ARROW) {
-        movingLeft = false;
-    }
-    else if (keyCode == DOWN_ARROW) {
-        movingDown = false;
-    }
-    else if (keyCode == RIGHT_ARROW) {
-        movingRight = false;
-    }
-
-} */
 
 function keyPressed(){
     if(humanPlaying){

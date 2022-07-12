@@ -93,7 +93,19 @@ class Player{
         this.deathByDot = true;
         //this.deathAtStep = this.brain.step;
       }
+
     }
+    for (var i = 0; i< spikes.length; i++) {
+      if (spikes[i].collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
+        this.fading = true;
+        this.dead = true;
+        this.deathByDot = true;
+        //this.deathAtStep = this.brain.step;
+      }
+
+    }
+
+
     /* if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
       this.reachedGoal = true;
     } */

@@ -45,14 +45,40 @@ function setLevel1SafeArea() {
 }
 
 function setSpikes() { 
-  tiles[2][3].spikes.push(2);
-  tiles[3][3].spikes.push(2);
+  tiles[6][7].spikes.push(2);
+  tiles[7][7].spikes.push(2);
+  tiles[7][7].spikes.push(1);
+  tiles[7][6].spikes.push(1);
+  tiles[7][5].spikes.push(1);
+  tiles[7][5].spikes.push(4);
+  tiles[6][5].spikes.push(4);
+  tiles[5][5].spikes.push(4);
+  tiles[4][4].spikes.push(1);
+  tiles[2][4].spikes.push(4);
+  tiles[3][4].spikes.push(4);
+  tiles[4][4].spikes.push(4);
+  tiles[2][4].spikes.push(3);
+  tiles[2][5].spikes.push(3);
+  tiles[2][6].spikes.push(3);
+  tiles[2][6].spikes.push(2);
+  tiles[3][6].spikes.push(2);
+
+  tiles[9][1].spikes.push(1);
+  tiles[9][2].spikes.push(1);
+
+  tiles[11][5].spikes.push(4);
+  tiles[13][5].spikes.push(4);
+  tiles[14][5].spikes.push(4);
+  tiles[15][5].spikes.push(4);
 }
 
 function setEdges() {
 
   //Left side walls
-  //tiles[2][3].edges.push(2);
+  tiles[2][3].edges.push(2);
+  //tiles[2][3].edges.push(1);
+
+
 
   tiles[3][3].edges.push(2);
   tiles[4][3].edges.push(2);

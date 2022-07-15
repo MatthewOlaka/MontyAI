@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "p5.play": "^2.3.0"
+  }
+}

@@ -37,11 +37,27 @@ var dots = [];
 var savedDots = [];
 var spikes = [];
 
+//player sprite animation declarations
+let playerSprite, playerUp, playerRight, playerDown, playerLeft;
+
+function preload(){
+  playerUp = loadAnimation("Images/Player/p_up1.png", "Images/Player/p_up2.png", "Images/Player/p_up3.png");
+  playerRight = loadAnimation("Images/Player/p_right1.png", "Images/Player/p_right2.png", "Images/Player/p_right3.png");
+  playerDown = loadAnimation("Images/Player/p_down1.png", "Images/Player/p_down2.png", "Images/Player/p_down3.png");
+  playerLeft = loadAnimation("Images/Player/p_left1.png", "Images/Player/p_left2.png", "Images/Player/p_left3.png");
+}
+
 function setup() {
     var canvas = createCanvas(2000, 2000);
 
     /* rectMode(CENTER);
     textAlign(CENTER); */
+
+    playerSprite = createSprite(width/2, height/2,30,30);
+    playerSprite.addAnimation("p_up", playerUp);
+    playerSprite.addAnimation("p_right", playerRight);
+    playerSprite.addAnimation("p_down", playerDown);
+    playerSprite.addAnimation("p_left", playerLeft );
 
 
     for (var i = 0; i < 21; i++) {
@@ -63,6 +79,7 @@ function setup() {
 
     setDots();
     //p.human = true;
+
     
 
     
@@ -89,16 +106,40 @@ function draw() {
          game();
          
      } */
+    
     background(32,89,155);
     drawTiles();
 
     //p = new Player();
     //p.human = true;
 
-    moveAndShowDots();
+    /* moveAndShowDots();
    
     p.update();
-    p.show();
+    p.show(); */
+    
+
+    if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
+      //reset player and dots
+      if(p.reachedGoal){
+        winCounter = 100;
+ 
+      }
+      p = new Player();
+      p.human = true;
+      resetDots();
+ 
+    }else {
+      //update the dots and the players and show them to the screen
+ 
+ 
+      moveAndShowDots();
+ 
+      p.update();
+      p.show();
+      playerSprite;
+    }
+    playerSprite;
 
     //console.log(p.dead);
     
@@ -192,19 +233,33 @@ function moveAndShowDots(){
   
 
 function keyPressed(){
+  playerSprite.animation.stop();
     if(humanPlaying){
       switch(keyCode) {
       case UP_ARROW:
         up = true;
+        playerSprite.position.y -= 1;
+        playerSprite.changeAnimation("p_up");
+        playerSprite.animation.play();
+
         break;
       case DOWN_ARROW:
         down = true;
+        playerSprite.position.y += 1;
+        playerSprite.changeAnimation("p_down");
+        playerSprite.animation.play();
         break;
       case RIGHT_ARROW:
         right = true;
+        playerSprite.position.x += 1;
+        playerSprite.changeAnimation("p_right");
+        playerSprite.animation.play();
         break;
       case LEFT_ARROW:
         left = true;
+        playerSprite.position.x -= 1;
+        playerSprite.changeAnimation("p_left");
+        playerSprite.animation.play();
         break;
       }
       switch(key){

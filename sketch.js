@@ -40,7 +40,7 @@ var spikes = [];
 //player sprite animation declarations
 let playerSprite, playerUp, playerRight, playerDown, playerLeft;
 
-function preload(){
+function preload() {
   playerUp = loadAnimation("Images/Player/p_up1.png", "Images/Player/p_up2.png", "Images/Player/p_up3.png");
   playerRight = loadAnimation("Images/Player/p_right1.png", "Images/Player/p_right2.png", "Images/Player/p_right3.png");
   playerDown = loadAnimation("Images/Player/p_down1.png", "Images/Player/p_down2.png", "Images/Player/p_down3.png");
@@ -48,127 +48,135 @@ function preload(){
 }
 
 function setup() {
-    var canvas = createCanvas(2000, 2000);
+  var canvas = createCanvas(2000, 2000);
 
-    /* rectMode(CENTER);
-    textAlign(CENTER); */
+  /* rectMode(CENTER);
+  textAlign(CENTER); */
 
-    playerSprite = createSprite(width/2, height/2,30,30);
-    playerSprite.addAnimation("p_up", playerUp);
-    playerSprite.addAnimation("p_right", playerRight);
-    playerSprite.addAnimation("p_down", playerDown);
-    playerSprite.addAnimation("p_left", playerLeft );
+  playerSprite = createSprite(/* width/2, height/2,30,30 */3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
+  playerSprite.addAnimation("p_up", playerUp);
+  playerSprite.addAnimation("p_right", playerRight);
+  playerSprite.addAnimation("p_down", playerDown);
+  playerSprite.addAnimation("p_left", playerLeft);
 
 
-    for (var i = 0; i < 21; i++) {
-        tiles[i] = [];
-        for (var j = 0; j < 12; j++) {
-            tiles[i][j] = new Tile(i, j);
-        }
+  for (var i = 0; i < 21; i++) {
+    tiles[i] = [];
+    for (var j = 0; j < 12; j++) {
+      tiles[i][j] = new Tile(i, j);
     }
-    
-    setLevel1Walls();
-    setLevel1Goal();
-    setLevel1SafeArea();
-    setEdges();
-    setKillWalls();
-    setSpikes();
-    setSolids();
+  }
 
-    p = new Player();
+  setLevel1Walls();
+  setLevel1Goal();
+  setLevel1SafeArea();
+  setEdges();
+  setKillWalls();
+  setSpikes();
+  setSolids();
 
-    setDots();
-    //p.human = true;
+  p = new Player();
 
-    
+  setDots();
+  KeyPressedSprite();
+  //p.human = true;
 
-    
 
-    //prevents the window from moving from the arrow keys or the spacebar
-    window.addEventListener("keydown", function(e) {
-        // space and arrow keys
-        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-            e.preventDefault();
-        }
-    }, false);
+
+
+
+  //prevents the window from moving from the arrow keys or the spacebar
+  window.addEventListener("keydown", function (e) {
+    // space and arrow keys
+    if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
+    }
+  }, false);
 }
 
 
 
 function draw() {
-    //background(200)
-    //rect(50, 50, 1000, 1000);
+  //background(200)
+  //rect(50, 50, 1000, 1000);
 
-    //fill(100,200,95)
-    //circle(xpos, ypos, 35);
+  //fill(100,200,95)
+  //circle(xpos, ypos, 35);
 
-    /*  if (stage == 0) {
-         game();
-         
-     } */
-    
-    background(32,89,155);
-    drawTiles();
+  /*  if (stage == 0) {
+       game();
+       
+   } */
 
-    //p = new Player();
-    //p.human = true;
+  background(32, 89, 155);
+  drawTiles();
 
-    /* moveAndShowDots();
-   
-    p.update();
-    p.show(); */
-    
 
-    if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
-      //reset player and dots
-      if(p.reachedGoal){
-        winCounter = 100;
+
+
+
+  //keyPressed();
+
+  //p = new Player();
+  //p.human = true;
+
+  /* moveAndShowDots();
  
-      }
-      p = new Player();
-      p.human = true;
-      resetDots();
- 
-    }else {
-      //update the dots and the players and show them to the screen
- 
- 
-      moveAndShowDots();
- 
-      p.update();
-      p.show();
-      playerSprite;
+  p.update();
+  p.show(); */
+
+
+  if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
+    //reset player and dots
+    if (p.reachedGoal) {
+      winCounter = 100;
+
     }
-    playerSprite;
+    p = new Player();
+    p.human = true;
+    resetDots();
 
-    //console.log(p.dead);
-    
-
-   // setPlayerVelocity();
+  } else {
+    //update the dots and the players and show them to the screen
 
 
-    /* if (humanPlaying) {//if the user is controlling the square
-        if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
-          //reset player and dots
-          if(p.reachedGoal){
-            winCounter = 100;
-     
-          }
-          p = new Player();
-          p.human = true;
-          //resetDots();
-     
-        } else {
-          //update the dots and the players and show them to the screen
-     
-     
-          //moveAndShowDots();
-     
-          p.update();
-          p.show();
+    moveAndShowDots();
+
+    p.update();
+    p.show();
+
+  }
+
+
+  //console.log(p.dead);
+
+
+  // setPlayerVelocity();
+
+
+  /* if (humanPlaying) {//if the user is controlling the square
+      if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
+        //reset player and dots
+        if(p.reachedGoal){
+          winCounter = 100;
+   
         }
- */
-      
+        p = new Player();
+        p.human = true;
+        //resetDots();
+   
+      } else {
+        //update the dots and the players and show them to the screen
+   
+   
+        //moveAndShowDots();
+   
+        p.update();
+        p.show();
+      }
+*/
+  KeyPressedSprite();
+  //drawSprites();
 
 
 }
@@ -187,101 +195,102 @@ function draw() {
 } */
 
 function drawTiles() {
-    for (var i = 1; i < tiles.length-4; i++) {
+  for (var i = 1; i < tiles.length - 4; i++) {
     //for (var i = 0; i < tiles.length; i++) {
-        for (var j = 0; j < tiles[0].length; j++) {
-            tiles[i][j].show();
-        }
+    for (var j = 0; j < tiles[0].length; j++) {
+      tiles[i][j].show();
     }
-    for (var i = 0; i < tiles.length; i++) {
-        for (var j = 0; j < tiles[0].length; j++) {
-            tiles[i][j].showEdges();
-        }
+  }
+  for (var i = 0; i < tiles.length; i++) {
+    for (var j = 0; j < tiles[0].length; j++) {
+      tiles[i][j].showEdges();
     }
-    for (var i = 0; i < tiles.length; i++) {
-        for (var j = 0; j < tiles[0].length; j++) {
-            tiles[i][j].showSpikes();
-        }
+  }
+  for (var i = 0; i < tiles.length; i++) {
+    for (var j = 0; j < tiles[0].length; j++) {
+      tiles[i][j].showSpikes();
     }
+  }
 }
 
-function moveAndShowDots(){
-    for (var i = 0; i < dots.length; i ++) {
-      dots[i].move();
-      dots[i].show();
-    }
-  
+function moveAndShowDots() {
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].move();
+    dots[i].show();
   }
-  function resetDots(){
-    for (var i = 0; i < dots.length; i ++) {
-      dots[i].resetDot();
-    }
-  
-  }
-  
-  function loadDots(){
-    for (var i = 0; i< dots.length; i++) {
-      dots[i] = savedDots[i].clone();
-    }
-  }
-  
-  function saveDots(){
-    for (var i = 0; i< dots.length; i++) {
-      savedDots[i] = dots[i].clone();
-    }
-  }
-  
 
-function keyPressed(){
-  playerSprite.animation.stop();
-    if(humanPlaying){
-      switch(keyCode) {
+}
+function resetDots() {
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].resetDot();
+  }
+
+}
+
+function loadDots() {
+  for (var i = 0; i < dots.length; i++) {
+    dots[i] = savedDots[i].clone();
+  }
+}
+
+function saveDots() {
+  for (var i = 0; i < dots.length; i++) {
+    savedDots[i] = dots[i].clone();
+  }
+}
+
+
+function keyPressed() {
+  //playerSprite.animation.stop();
+  if (humanPlaying) {
+    switch (keyCode) {
       case UP_ARROW:
         up = true;
-        playerSprite.position.y -= 1;
+        /* playerSprite.position.y -= 30;
         playerSprite.changeAnimation("p_up");
-        playerSprite.animation.play();
+        playerSprite.animation.play(); */
 
         break;
       case DOWN_ARROW:
         down = true;
-        playerSprite.position.y += 1;
+        /* playerSprite.position.y += 30;
         playerSprite.changeAnimation("p_down");
-        playerSprite.animation.play();
+        playerSprite.animation.play(); */
         break;
       case RIGHT_ARROW:
         right = true;
-        playerSprite.position.x += 1;
+        /* playerSprite.position.x += 30;
         playerSprite.changeAnimation("p_right");
-        playerSprite.animation.play();
+        playerSprite.animation.play(); */
         break;
       case LEFT_ARROW:
         left = true;
-        playerSprite.position.x -= 1;
+        /* playerSprite.position.x -= 30;
         playerSprite.changeAnimation("p_left");
-        playerSprite.animation.play();
+        playerSprite.animation.play(); */
         break;
-      }
-      switch(key){
-        case 'W':
-          up = true;
-          break;
-        case 'S':
-          down = true;
-          break;
-        case 'D':
-          right = true;
-          break;
-        case 'A':
-          left = true;
-          break;
-      }
-      setPlayerVelocity();
     }
+    switch (key) {
+      case 'W':
+        up = true;
+        break;
+      case 'S':
+        down = true;
+        break;
+      case 'D':
+        right = true;
+        break;
+      case 'A':
+        left = true;
+        break;
+    }
+    setPlayerVelocity();
+  }
 }
-function keyReleased(){
-    if(humanPlaying){
-      switch(keyCode) {
+function keyReleased() {
+  //playerSprite.animation.stop();
+  if (humanPlaying) {
+    switch (keyCode) {
       case UP_ARROW:
         up = false;
         break;
@@ -294,42 +303,81 @@ function keyReleased(){
       case LEFT_ARROW:
         left = false;
         break;
-      }
-      switch(key){
-        case 'W':
-          up = false;
-          break;
-        case 'S':
-          down = false;
-          break;
-        case 'D':
-          right = false;
-          break;
-        case 'A':
-          left = false;
-          break;
-      }
-  
-      setPlayerVelocity();
     }
-  
+    switch (key) {
+      case 'W':
+        up = false;
+        break;
+      case 'S':
+        down = false;
+        break;
+      case 'D':
+        right = false;
+        break;
+      case 'A':
+        left = false;
+        break;
+    }
+
+    setPlayerVelocity();
   }
-  //set the velocity of the player based on what keys are currently down
-  
-  function setPlayerVelocity(){
-    p.vel.y= 0;
-    if (up) {
-      p.vel.y -=1;
-    }
-    if (down) {
-      p.vel.y +=1;
-    }
-    p.vel.x= 0;
-    if (left) {
-      p.vel.x -=1;
-    }
-    if (right) {
-      p.vel.x +=1;
-    }
-  
+
+}
+//set the velocity of the player based on what keys are currently down
+
+function setPlayerVelocity() {
+  playerSprite.animation.stop();
+  p.vel.y = 0;
+  if (up) {
+    p.vel.y -= 1;
+    /* playerSprite.position.y -= 30;
+    playerSprite.changeAnimation("p_up");
+    playerSprite.animation.play(); */
   }
+  if (down) {
+    p.vel.y += 1;
+    /* playerSprite.position.y += 30;
+    playerSprite.changeAnimation("p_down");
+    playerSprite.animation.play(); */
+  }
+  p.vel.x = 0;
+  if (left) {
+    p.vel.x -= 1;
+    /* playerSprite.position.x -= 30;
+    playerSprite.changeAnimation("p_left");
+    playerSprite.animation.play(); */
+  }
+  if (right) {
+    p.vel.x += 1;
+    /* playerSprite.position.x += 30;
+    playerSprite.changeAnimation("p_right");
+    playerSprite.animation.play(); */
+  }
+
+}
+
+function KeyPressedSprite() {
+  playerSprite.animation.stop();
+  if (keyIsDown(UP_ARROW)) {
+    playerSprite.position.y -= 3.4;
+    playerSprite.changeAnimation("p_up");
+    playerSprite.animation.play();
+
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    playerSprite.position.y += 3.4;
+    playerSprite.changeAnimation("p_down");
+    playerSprite.animation.play();
+  }
+  if (keyIsDown(RIGHT_ARROW)) {
+    playerSprite.position.x += 3.4;
+    playerSprite.changeAnimation("p_right");
+    playerSprite.animation.play();
+
+  }
+  if (keyIsDown(LEFT_ARROW)) {
+    playerSprite.position.x -= 3.4;
+    playerSprite.changeAnimation("p_left");
+    playerSprite.animation.play();
+  }
+}

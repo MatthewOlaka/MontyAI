@@ -20,6 +20,16 @@ class Player {
     this.human = true;
     //this.setNodes();
 
+    this.coins = [
+      new Coin(7.5*tileSize+xoff, 1.6*tileSize+yoff),
+      new Coin(10.5*tileSize+xoff, 6.5*tileSize+yoff),
+      new Coin(6.5*tileSize+xoff, 9.5*tileSize+yoff),
+      new Coin(15.5*tileSize+xoff, 6.5*tileSize+yoff),
+      //new Coin(2.5*tileSize+xoff, 3.5*tileSize+yoff),
+      //new Coin(4.5*tileSize+xoff, 3.5*tileSize+yoff),
+      //new Coin(4.5*tileSize+xoff, 2.5*tileSize+yoff),
+    ];
+
   }
 
   /* setNodes() {
@@ -58,9 +68,9 @@ class Player {
 
     //playerSprite = createSprite(/* width/2, height/2,30,30 */30, 30, tileSize / 5, tileSize / 5);
     //drawSprites();
-    /* for (var coinNum = 0; coinNum < this.coins.length; coinNum++) {
+    for (var coinNum = 0; coinNum < this.coins.length; coinNum++) {
       this.coins[coinNum].show();
-    } */
+    }
   }
 
   move() {
@@ -92,6 +102,11 @@ class Player {
 
   //checks if the player
   checkCollisions() {
+
+    for (var coinNum = 0; coinNum < this.coins.length; coinNum++) {
+      this.coins[coinNum].collides(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size));
+    }
+
     for (var i = 0; i < dots.length; i++) {
       if (dots[i].collides(this.pos, createVector(this.pos.x + this.size, this.pos.y + this.size))) {
         this.fading = true;
@@ -109,6 +124,15 @@ class Player {
         //this.deathAtStep = this.brain.step;
       }
 
+    }
+
+    if (this.coins[0].taken && this.coins[1].taken && this.coins[2].taken && this.coins[3].taken &&
+      this.coins[4].taken && this.coins[5].taken && this.coins[6].taken &&
+      winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
+      this.reachedGoal = true;
+    }
+    for (var i = 0; i< this.nodes.length; i++) {
+      this.nodes[i].collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size));
     }
 
 

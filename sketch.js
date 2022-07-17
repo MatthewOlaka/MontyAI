@@ -40,6 +40,8 @@ var spikes = [];
 //player sprite animation declarations
 let playerSprite, playerUp, playerRight, playerDown, playerLeft;
 
+var showedCoin = false;
+
 function preload() {
   playerUp = loadAnimation("Images/Player/p_up1.png", "Images/Player/p_up2.png", "Images/Player/p_up3.png");
   playerRight = loadAnimation("Images/Player/p_right1.png", "Images/Player/p_right2.png", "Images/Player/p_right3.png");
@@ -107,7 +109,7 @@ function draw() {
        game();
        
    } */
-
+  showedCoin = false;
   background(32, 89, 155);
   drawTiles();
 

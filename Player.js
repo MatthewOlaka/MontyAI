@@ -29,14 +29,34 @@ class Player {
       //new Coin(4.5*tileSize+xoff, 3.5*tileSize+yoff),
       //new Coin(4.5*tileSize+xoff, 2.5*tileSize+yoff),
     ];
+    this.setNodes();
 
   }
 
-  /* setNodes() {
-    this.nodes[0] = new Node(tiles[6][7]);
+
+   setNodes() {
+    /* this.nodes[0] = new Node(tiles[6][7]);
     this.nodes[1] = new Node(tiles[17][2]);
+    this.nodes[0].setDistanceToFinish(this.nodes[1]); */
+
+    this.nodes[0] = new Node(this.coins[0],false,true);
+    this.nodes[1] = new Node(this.coins[1],false,true);
+    this.nodes[2] = new Node(this.coins[2],false,true);
+    this.nodes[3] = new Node(this.coins[3],false,true);
+    //this.nodes[4] = new Node(this.coins[4],false,true);
+    //this.nodes[5] = new Node(this.coins[5],false,true);
+    //this.nodes[6] = new Node(this.coins[6],false,true);
+    this.nodes[4] = new Node(tiles[15][10],true,false);
+    //this.nodes[6].setDistanceToFinish(this.nodes[7]);
+    //this.nodes[5].setDistanceToFinish(this.nodes[6]);
+    //this.nodes[4].setDistanceToFinish(this.nodes[5]);
+    this.nodes[3].setDistanceToFinish(this.nodes[4]);
+    this.nodes[2].setDistanceToFinish(this.nodes[3]);
+    this.nodes[1].setDistanceToFinish(this.nodes[2]);
     this.nodes[0].setDistanceToFinish(this.nodes[1]);
   }
+
+  /*
  
   show(){
     fill(255, 0, 0, this.fadeCounter);
@@ -74,7 +94,7 @@ class Player {
   }
 
   move() {
-    /*  if (!humanPlaying){
+     if (!humanPlaying){
        if (this.moveCount == 0) {//move in the direction for 6 frames
          if (this.brain.directions.length > this.brain.step) {//if there are still directions left then set the velocity as the next PVector in the direcitons array
            this.vel = this.brain.directions[this.brain.step];
@@ -87,7 +107,7 @@ class Player {
        } else {
          this.moveCount--;
        }
-     } */
+     }
 
     var temp = createVector(this.vel.x, this.vel.y);
 
@@ -127,7 +147,6 @@ class Player {
     }
 
     if (this.coins[0].taken && this.coins[1].taken && this.coins[2].taken && this.coins[3].taken &&
-      this.coins[4].taken && this.coins[5].taken && this.coins[6].taken &&
       winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
       this.reachedGoal = true;
     }

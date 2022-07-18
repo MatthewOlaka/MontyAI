@@ -18,10 +18,10 @@ class Spikes {
       //
       // movement.x = round(movement.x);
       // movement.y = round(movement.y);
-      var ptl = createVector(tl.x+movement.x, tl.y);
+      var ptl = createVector(tl.x+movement.x, tl.y); 
       var pbr = createVector(br.x+movement.x, br.y);
   
-      if ((ptl.x <this.bottomRight.x && pbr.x > this.pos.x) &&( ptl.y < this.bottomRight.y && pbr.y > this.pos.y)) {
+      if ((ptl.x <this.bottomRight.x   && pbr.x > this.pos.x) &&( ptl.y < this.bottomRight.y  && pbr.y > this.pos.y)) {
   
         x=0;
       }

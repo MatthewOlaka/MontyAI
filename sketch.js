@@ -15,11 +15,55 @@ var yoff = 150;
 
 var humanPlaying = true;
 
+var showBest = true;
+
+
 var winArea;
 var winCounter = -1;
 
 var img;
 var flip = true;
+
+//gen replay vars
+var replayGens = false;
+var genPlayer;
+var upToGenPos = 0;
+
+//population vars
+var numberOfSteps = 10;
+var testPopulation;
+
+//population size vars
+var  populationSize = 500;
+var popPara;
+var popPlus;
+var popMinus;
+
+//mutation rate vars
+var mutationRate = 0.04;
+var mrPara;
+var mrPlus;
+var mrMinus;
+
+//evolution speed vars
+var evolutionSpeed =1;
+var speedPara;
+var speedPlus;
+var speedMinus;
+
+//increaseMoves
+var movesH3;
+
+var increaseMovesBy =5;
+var movesPara;
+var movesPlus;
+var movesMinus;
+
+var increaseEvery =5;
+var everyPara;
+var everyPlus;
+var everyMinus;
+
 
 let xpos = 300;
 let ypos = 300;
@@ -82,6 +126,11 @@ function setup() {
   setDots();
   KeyPressedSprite();
   //p.human = true;
+
+  winArea = new Solid(tiles[13][8], tiles[15][8]);
+
+  testPopulation = new Population(populationSize);
+  img = loadImage("https://i.imgur.com/QZf0d6r.gif");
 
 
 
@@ -289,6 +338,28 @@ function keyPressed() {
     setPlayerVelocity();
   }
 }
+
+if(key == 'P'){
+  if (humanPlaying) {//if human is currently playing
+
+   //reset dots to position
+   humanPlaying = false;
+   loadDots();
+ } else {//if AI is currently playing
+   if (replayGens) {
+     upToGenPos = 0;
+     replayGens = false;
+   }
+   humanPlaying = true;
+   p = new Player();
+   p.human = true;
+   //save the positions of the dots
+   saveDots();
+   resetDots();
+ }
+}
+
+
 function keyReleased() {
   //playerSprite.animation.stop();
   if (humanPlaying) {

@@ -8,7 +8,7 @@ class Coin {
     show(){
       if(!showedCoin && !this.taken){
         stroke(0);
-        fill(255,230,230);
+        fill(255,230,100);
         ellipse(this.pos.x,this.pos.y,this.diameter);
         showedCoin = true;
     }
@@ -32,4 +32,3 @@ class Coin {
   
   
   }
-  

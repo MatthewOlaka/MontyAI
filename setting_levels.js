@@ -57,9 +57,9 @@ function setSpikes() {
   //tiles[6][4].spikes.push(2);
   //tiles[5][4].spikes.push(2);
   tiles[4][4].spikes.push(1);
-  tiles[2][4].spikes.push(4);
-  tiles[3][4].spikes.push(4);
-  tiles[4][4].spikes.push(4);
+  //tiles[2][4].spikes.push(4);
+  //tiles[3][4].spikes.push(4);
+  //tiles[4][4].spikes.push(4);
   tiles[2][4].spikes.push(3);
   tiles[2][5].spikes.push(3);
   tiles[2][6].spikes.push(3);

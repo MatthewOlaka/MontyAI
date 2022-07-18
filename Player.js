@@ -136,10 +136,10 @@ class Player {
     }
 
 
-    /* if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
+    if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
       this.reachedGoal = true;
-    } */
-    /*  for (var i = 0; i< this.nodes.length; i++) {
+    }
+     /* for (var i = 0; i< this.nodes.length; i++) {
        this.nodes[i].collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size));
      } */
   }
@@ -161,7 +161,7 @@ class Player {
   }
   //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  /* calculateFitness() {
+  calculateFitness() {
    if (this.reachedGoal) {//if the dot reached the goal then the fitness is based on the amount of steps it took to get there
      this.fitness = 1.0/16.0 + 10000.0/(this.brain.step * this.brain.step);
    } else {//if the dot didn't reach the goal then the fitness is based on how close it is to the goal
@@ -190,5 +190,5 @@ class Player {
    baby.deathAtStep = this.deathAtStep;
    baby.gen = this.gen;
    return baby;
- } */
+ }
 }

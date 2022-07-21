@@ -13,7 +13,7 @@ var tileSize = 50;
 var xoff = 300;
 var yoff = 150;
 
-var humanPlaying = true;
+var humanPlaying = false;
 
 var showBest = true;
 
@@ -130,7 +130,7 @@ function setup() {
   winArea = new Solid(tiles[13][8], tiles[15][8]);
 
   testPopulation = new Population(populationSize);
-  img = loadImage("https://i.imgur.com/QZf0d6r.gif");
+  //img = loadImage("https://i.imgur.com/QZf0d6r.gif");
 
 
 
@@ -163,21 +163,7 @@ function draw() {
   drawTiles();
 
 
-
-
-
-  //keyPressed();
-
-  //p = new Player();
-  //p.human = true;
-
-  /* moveAndShowDots();
- 
-  p.update();
-  p.show(); */
-
-
-  if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
+  /* if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
     //reset player and dots
     if (p.reachedGoal) {
       winCounter = 100;
@@ -196,36 +182,87 @@ function draw() {
     p.update();
     p.show();
 
-  }
+  } */
 
-
-  //console.log(p.dead);
-
-
-  // setPlayerVelocity();
-
-
-  /* if (humanPlaying) {//if the user is controlling the square
-      if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
-        //reset player and dots
-        if(p.reachedGoal){
-          winCounter = 100;
-   
-        }
-        p = new Player();
-        p.human = true;
-        //resetDots();
-   
-      } else {
-        //update the dots and the players and show them to the screen
-   
-   
-        //moveAndShowDots();
-   
-        p.update();
-        p.show();
+  if (humanPlaying) {//if the user is controlling the square
+    if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
+      //reset player and dots
+      if(p.reachedGoal){
+        winCounter = 100;
+ 
       }
-*/
+      p = new Player();
+      p.human = true;
+      resetDots();
+ 
+    } else {
+      //update the dots and the players and show them to the screen
+ 
+ 
+      moveAndShowDots();
+ 
+      p.update();
+      p.show();
+    }
+  } else
+    if (replayGens) {//if replaying the best generations
+      if ((genPlayer.dead && genPlayer.fadeCounter <=0) || genPlayer.reachedGoal) { //if the current gen is done
+        upToGenPos ++;//next gen
+        if (testPopulation.genPlayers.length <= upToGenPos) {//if reached the final gen
+          //stop replaying gens
+          upToGenPos = 0;
+          replayGens = false;
+          //return the dots to their saved position
+ 
+          loadDots();
+        } else {//if there are more generations to show
+          //set gen player as the best player of that generation
+          genPlayer = testPopulation.genPlayers[upToGenPos].gimmeBaby();
+          //reset the dots positions
+          resetDots();
+        }
+      } else {//if not done
+        //move and show dots
+        moveAndShowDots();
+        //move and update player
+        genPlayer.update();
+        genPlayer.show();
+      }
+    } else//if training normaly
+      if (testPopulation.allPlayersDead()) {
+        //genetic algorithm
+        testPopulation.calculateFitness();
+        testPopulation.naturalSelection();
+        testPopulation.mutateDemBabies();
+        //reset dots
+       resetDots();
+ 
+        //every 5 generations incease the number of moves by 5
+        if (testPopulation.gen % increaseEvery ==0) {
+          testPopulation.increaseMoves();
+        }
+ 
+      } else {
+ 
+        // moveAndShowDots();
+        //update and show population
+ 
+        for(var j = 0 ; j< evolutionSpeed; j++){
+          for (var i = 0; i < dots.length; i ++) {
+            dots[i].move();
+          }
+          testPopulation.update();
+        }
+ 
+        for (var i = 0; i < dots.length; i ++) {
+          dots[i].show();
+        }
+        testPopulation.show();
+      }
+
+
+  
+
   KeyPressedSprite();
   //drawSprites();
 
@@ -336,28 +373,49 @@ function keyPressed() {
         break;
     }
     setPlayerVelocity();
+  }else{//if human is not playing
+    switch(key) {
+    case ' ':
+      showBest = !showBest;
+      break;
+    case 'G'://replay gens
+      if (replayGens) {
+        upToGenPos = 0;
+        replayGens = false;
+        loadDots();
+      } else
+        if (testPopulation.genPlayers.length > 0) {
+          replayGens = true;
+          genPlayer = testPopulation.genPlayers[0].gimmeBaby();
+          saveDots();
+          resetDots();
+        }
+      break;
+    }
+  }
+
+  if(key == 'P'){
+    if (humanPlaying) {//if human is currently playing
+  
+     //reset dots to position
+     humanPlaying = false;
+     loadDots();
+   } else {//if AI is currently playing
+     if (replayGens) {
+       upToGenPos = 0;
+       replayGens = false;
+     }
+     humanPlaying = true;
+     p = new Player();
+     p.human = true;
+     //save the positions of the dots
+     saveDots();
+     resetDots();
+   }
   }
 }
 
-if(key == 'P'){
-  if (humanPlaying) {//if human is currently playing
 
-   //reset dots to position
-   humanPlaying = false;
-   loadDots();
- } else {//if AI is currently playing
-   if (replayGens) {
-     upToGenPos = 0;
-     replayGens = false;
-   }
-   humanPlaying = true;
-   p = new Player();
-   p.human = true;
-   //save the positions of the dots
-   saveDots();
-   resetDots();
- }
-}
 
 
 function keyReleased() {

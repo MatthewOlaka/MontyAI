@@ -70,6 +70,7 @@ function setSpikes() {
 
   tiles[9][1].spikes.push(1);
   tiles[9][2].spikes.push(1);
+  tiles[9][3].spikes.push(1);
 
   tiles[11][5].spikes.push(4);
   tiles[11][4].spikes.push(2);
@@ -128,8 +129,8 @@ function setEdges() {
 
 
   //Right side walls
-  tiles[8][2].edges.push(2);
-  tiles[9][2].edges.push(2);
+  //tiles[8][2].edges.push(2);
+  //tiles[9][2].edges.push(2);
   tiles[10][2].edges.push(3);
   tiles[10][1].edges.push(3);
   tiles[10][2].edges.push(2);
@@ -142,9 +143,10 @@ function setEdges() {
   tiles[15][4].edges.push(2);
 
   tiles[11][4].edges.push(2);
-  tiles[8][3].edges.push(3);
-  tiles[8][3].edges.push(2);
-  tiles[9][3].edges.push(2);
+  //tiles[8][3].edges.push(3);
+  //tiles[8][3].edges.push(2);
+  //tiles[9][3].edges.push(2);
+  tiles[10][3].edges.push(3);
   tiles[10][3].edges.push(2);
   tiles[10][4].edges.push(1);
   tiles[10][5].edges.push(1);
@@ -193,6 +195,7 @@ function setEdges() {
 function setDots() {
   dots.push(new Dot(tiles[5][1], tiles[5][4], 0, 0.6));
   dots.push(new Dot(tiles[6][4], tiles[6][1], 0, -0.6));
+  dots.push(new Dot(tiles[7][1], tiles[7][4], 0, 0.6));
   dots.push(new Dot(tiles[8][5], tiles[8][8], 0, 0.6));
   dots.push(new Dot(tiles[2][10], tiles[12][10], 0.7));
   dots.push(new Dot(tiles[11][7], tiles[15][7], 0.6));
@@ -209,7 +212,7 @@ function setSolids() {
 
   // The vertical inner maze walls.
  // solids.push(new Solid(tiles[10][1], tiles[10][3]));
-  solids.push(new Solid(tiles[8][3], tiles[8][4]));
+  //solids.push(new Solid(tiles[10][3], tiles[10][4]));
   solids.push(new Solid(tiles[13][3], tiles[13][5]));
   //solids.push(new Solid(tiles[5][4], tiles[5][5]));
   solids.push(new Solid(tiles[11][4], tiles[11][9]));
@@ -220,10 +223,10 @@ function setSolids() {
   //solids.push(new Solid(tiles[15][1], tiles[15][2]));
 
   // The horizontal inner maze walls.
-  //solids.push(new Solid(tiles[2][4], tiles[5][4]));
+  solids.push(new Solid(tiles[2][4], tiles[5][4]));
   solids.push(new Solid(tiles[5][5], tiles[9][5]));
-  solids.push(new Solid(tiles[8][3], tiles[13][3]));
-  solids.push(new Solid(tiles[8][4], tiles[11][4]));
+  solids.push(new Solid(tiles[10][3], tiles[13][3]));
+  solids.push(new Solid(tiles[10][4], tiles[11][4]));
   //solids.push(new Solid(tiles[11][5], tiles[12][5]));
   //solids.push(new Solid(tiles[13][5], tiles[16][5]));
   //solids.push(new Solid(tiles[2][7], tiles[4][7]));
@@ -238,7 +241,7 @@ function setSolids() {
 function setKillWalls() {
   
   //Vertical Walls
-  spikes.push(new Spikes(tiles[10][1], tiles[10][3]));
+  spikes.push(new Spikes(tiles[10][1], tiles[10][4]));
   spikes.push(new Spikes(tiles[5][4], tiles[5][5]));
   spikes.push(new Spikes(tiles[2][4], tiles[2][7])); 
 

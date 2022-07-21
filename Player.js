@@ -16,12 +16,13 @@ class Player {
     this.fitness = 0;
     this.nodes = [];
     this.fading = false;
-    //this.brain = new Brain(numberOfSteps);
-    this.human = true;
+    this.brain = new Brain(numberOfSteps);
+    this.human = false;
     //this.setNodes();
 
     this.coins = [
-      new Coin(7.5*tileSize+xoff, 1.6*tileSize+yoff),
+      new Coin(8.5*tileSize+xoff, 1.6*tileSize+yoff),
+      new Coin(8.5*tileSize+xoff, 4.6*tileSize+yoff),
       new Coin(10.5*tileSize+xoff, 6.5*tileSize+yoff),
       new Coin(6.5*tileSize+xoff, 9.5*tileSize+yoff),
       new Coin(15.5*tileSize+xoff, 6.5*tileSize+yoff),
@@ -43,13 +44,13 @@ class Player {
     this.nodes[1] = new Node(this.coins[1],false,true);
     this.nodes[2] = new Node(this.coins[2],false,true);
     this.nodes[3] = new Node(this.coins[3],false,true);
-    //this.nodes[4] = new Node(this.coins[4],false,true);
+    this.nodes[4] = new Node(this.coins[4],false,true);
     //this.nodes[5] = new Node(this.coins[5],false,true);
     //this.nodes[6] = new Node(this.coins[6],false,true);
-    this.nodes[4] = new Node(tiles[15][10],true,false);
+    this.nodes[5] = new Node(tiles[15][10],true,false);
     //this.nodes[6].setDistanceToFinish(this.nodes[7]);
     //this.nodes[5].setDistanceToFinish(this.nodes[6]);
-    //this.nodes[4].setDistanceToFinish(this.nodes[5]);
+    this.nodes[4].setDistanceToFinish(this.nodes[5]);
     this.nodes[3].setDistanceToFinish(this.nodes[4]);
     this.nodes[2].setDistanceToFinish(this.nodes[3]);
     this.nodes[1].setDistanceToFinish(this.nodes[2]);
@@ -158,9 +159,7 @@ class Player {
     if (winArea.collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size))) {
       this.reachedGoal = true;
     }
-     /* for (var i = 0; i< this.nodes.length; i++) {
-       this.nodes[i].collision(this.pos, createVector(this.pos.x+this.size, this.pos.y+this.size));
-     } */
+     
   }
   //----------------------------------------------------------------------------------------------------------------------------------------------------------
   update() {

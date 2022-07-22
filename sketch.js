@@ -11,9 +11,9 @@ var p;
 
 var tileSize = 50;
 var xoff = 300;
-var yoff = 150;
+var yoff = 50;
 
-var humanPlaying = false;
+var humanPlaying = true;
 
 var showBest = true;
 
@@ -59,7 +59,7 @@ var movesPara;
 var movesPlus;
 var movesMinus;
 
-var increaseEvery =5;
+var increaseEvery =3;
 var everyPara;
 var everyPlus;
 var everyMinus;
@@ -127,10 +127,11 @@ function setup() {
   KeyPressedSprite();
   //p.human = true;
 
-  winArea = new Solid(tiles[13][8], tiles[15][8]);
+  winArea = new Solid(tiles[14][8], tiles[16][8]);
 
   testPopulation = new Population(populationSize);
   //img = loadImage("https://i.imgur.com/QZf0d6r.gif");
+  img = loadImage("https://imgur.com/u4uRPnB");
 
 
 
@@ -161,6 +162,7 @@ function draw() {
   showedCoin = false;
   background(32, 89, 155);
   drawTiles();
+  writeShit(); 
 
 
   /* if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
@@ -327,6 +329,57 @@ function saveDots() {
   }
 }
 
+function writeShit(){
+
+  fill(247, 247, 255);
+  textSize(20);
+  noStroke();
+  text(" \tPress P to play the game yourself \t\t\t\t\t\t\t\t Press G to replay evolution highlights",250,920 );
+  text("Press SPACE to only show the best player", 450,980);
+  textSize(36);
+  if(winCounter > 0){
+
+    if(flip){
+      push();
+
+      scale(-1.0,1.0);
+      image(img,-300 -img.width + random(5),100+ random(5));
+      pop();
+    }else{
+    image(img,300+ random(5),100 + random(5));
+    }
+    textSize(100);
+    stroke(0);
+
+    text("YEEESSSSSSSIIIIIIRRRRRRRR", 110,400);
+    winCounter --;
+    if(winCounter % 10 ==0){
+
+      flip = !flip;
+    }
+    textSize(36);
+    noStroke();
+  }
+  if (replayGens) {
+    fill(0, 0, 0);
+    text("Generation: " + genPlayer.gen, 395, 85);
+    text("Number of moves: " + genPlayer.brain.directions.length, 840, 85);
+  } else if(!humanPlaying) {
+    textSize(25);
+    fill(0, 0, 0);
+    text("Generation: " + testPopulation.gen, 395, 85);
+    if(testPopulation.solutionFound){
+      text("Wins in " + testPopulation.minStep + " moves",840, 85);
+    }else{
+      text("Number of moves: " + testPopulation.players[0].brain.directions.length, 840, 85);
+    }
+  }else{
+    fill(0, 0, 0);
+    textSize(25);
+    text("Solo Gameplay", 660,85);
+  }
+}
+
 
 function keyPressed() {
   //playerSprite.animation.stop();
@@ -359,16 +412,16 @@ function keyPressed() {
         break;
     }
     switch (key) {
-      case 'W':
+      case 'w':
         up = true;
         break;
-      case 'S':
+      case 's':
         down = true;
         break;
-      case 'D':
+      case 'd':
         right = true;
         break;
-      case 'A':
+      case 'a':
         left = true;
         break;
     }
@@ -378,7 +431,7 @@ function keyPressed() {
     case ' ':
       showBest = !showBest;
       break;
-    case 'G'://replay gens
+    case 'g'://replay gens
       if (replayGens) {
         upToGenPos = 0;
         replayGens = false;
@@ -394,7 +447,7 @@ function keyPressed() {
     }
   }
 
-  if(key == 'P'){
+  if(key == 'p'){
     if (humanPlaying) {//if human is currently playing
   
      //reset dots to position
@@ -436,16 +489,16 @@ function keyReleased() {
         break;
     }
     switch (key) {
-      case 'W':
+      case 'w':
         up = false;
         break;
-      case 'S':
+      case 's':
         down = false;
         break;
-      case 'D':
+      case 'd':
         right = false;
         break;
-      case 'A':
+      case 'a':
         left = false;
         break;
     }

@@ -71,6 +71,8 @@ function setSpikes() {
   tiles[9][1].spikes.push(1);
   tiles[9][2].spikes.push(1);
   tiles[9][3].spikes.push(1);
+  tiles[10][3].spikes.push(3);
+
 
   tiles[11][5].spikes.push(4);
   tiles[11][4].spikes.push(2);

@@ -88,7 +88,7 @@ class Player {
      
 
     //playerSprite = createSprite(/* width/2, height/2,30,30 */30, 30, tileSize / 5, tileSize / 5);
-    //drawSprites();
+    // drawSprites();
     for (var coinNum = 0; coinNum < this.coins.length; coinNum++) {
       this.coins[coinNum].show();
     }
@@ -133,7 +133,7 @@ class Player {
         this.fading = true;
         this.dead = true;
         this.deathByDot = true;
-        //this.deathAtStep = this.brain.step;
+        this.deathAtStep = this.brain.step;
       }
 
     }
@@ -142,7 +142,7 @@ class Player {
         this.fading = true;
         this.dead = true;
         this.deathByDot = true;
-        //this.deathAtStep = this.brain.step;
+        this.deathAtStep = this.brain.step;
       }
 
     }
@@ -179,24 +179,28 @@ class Player {
   }
   //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  calculateFitness() {
-   if (this.reachedGoal) {//if the dot reached the goal then the fitness is based on the amount of steps it took to get there
-     this.fitness = 1.0/16.0 + 10000.0/(this.brain.step * this.brain.step);
-   } else {//if the dot didn't reach the goal then the fitness is based on how close it is to the goal
-     var estimatedDistance = 0.0;//the estimated distance of the path from the player to the goal
-     for (var i = this.nodes.length-1; i>=0; i--) {
-       if (!this.nodes[i].reached) {
-         estimatedDistance = this.nodes[i].distToFinish;
-         estimatedDistance += dist(this.pos.x, this.pos.y, this.nodes[i].pos.x, this.nodes[i].pos.y);
-       }
-     }
-     if (this.deathByDot) {
-       estimatedDistance *= 0.9;
-     }
-     this.fitness = 1.0/(estimatedDistance * estimatedDistance);
-   }
-   this.fitness*=this.fitness;
- }
+ calculateFitness() {
+  if (this.reachedGoal) {//if the dot reached the goal then the fitness is based on the amount of steps it took to get there
+    this.fitness = 1.0/16.0 + 10000.0/(this.brain.step * this.brain.step);
+  } else {//if the dot didn't reach the goal then the fitness is based on how close it is to the goal
+    var estimatedDistance = 0.0;//the estimated distance of the path from the player to the goal
+    for (var i = this.nodes.length-1; i>=0; i--) {
+      if (!this.nodes[i].reached) {
+        estimatedDistance = this.nodes[i].distToFinish;
+        estimatedDistance += dist(this.pos.x, this.pos.y, this.nodes[i].pos.x, this.nodes[i].pos.y);
+      }
+    }
+    if (this.deathByDot) {
+      estimatedDistance *= 0.9;
+    }
+    this.fitness = 1.0/(estimatedDistance * estimatedDistance);
+  }
+  this.fitness*=this.fitness;
+  if(this.coins[0].taken || this.coins[1].taken || this.coins[2].taken || this.coins[3].taken ||
+    this.coins[4].taken /* || this.coins[5].taken || this.coins[6].taken */){
+    this.fitness *=1.2;
+  }
+}
  
  
  

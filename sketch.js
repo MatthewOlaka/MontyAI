@@ -13,7 +13,7 @@ var tileSize = 50;
 var xoff = 300;
 var yoff = 50;
 
-var humanPlaying = true;
+var humanPlaying = false;
 
 var showBest = true;
 
@@ -21,7 +21,14 @@ var showBest = true;
 var winArea;
 var winCounter = -1;
 
-var img;
+var bonusCounter = 0;
+
+let img;
+let img2;
+let img3;
+let img4;
+let img5;
+let img6;
 var flip = true;
 
 //gen replay vars
@@ -34,7 +41,7 @@ var numberOfSteps = 10;
 var testPopulation;
 
 //population size vars
-var  populationSize = 500;
+var populationSize = 500;
 var popPara;
 var popPlus;
 var popMinus;
@@ -46,7 +53,7 @@ var mrPlus;
 var mrMinus;
 
 //evolution speed vars
-var evolutionSpeed =1;
+var evolutionSpeed = 1;
 var speedPara;
 var speedPlus;
 var speedMinus;
@@ -54,12 +61,12 @@ var speedMinus;
 //increaseMoves
 var movesH3;
 
-var increaseMovesBy =5;
+var increaseMovesBy = 5;
 var movesPara;
 var movesPlus;
 var movesMinus;
 
-var increaseEvery =3;
+var increaseEvery = 3;
 var everyPara;
 var everyPlus;
 var everyMinus;
@@ -80,11 +87,12 @@ var solids = [];
 var dots = [];
 var savedDots = [];
 var spikes = [];
+var bonusCoins = [];
 
 //player sprite animation declarations
 let playerSprite, playerUp, playerRight, playerDown, playerLeft;
 
-var showedCoin = false;
+var showedCoin = true;
 
 function preload() {
   playerUp = loadAnimation("Images/Player/p_up1.png", "Images/Player/p_up2.png", "Images/Player/p_up3.png");
@@ -95,11 +103,19 @@ function preload() {
 
 function setup() {
   var canvas = createCanvas(2000, 2000);
+  img = loadImage('Images/Arrow_keys_transparent.png');
+  img2 = loadImage('Images/Arrow_keys_transparent2.png');
+  img3 = loadImage('Images/p.png');
+  img4 = loadImage('Images/g.png');
+  img5 = loadImage('Images/space_key_s.png');
+  img6 = loadImage('Images/congrats.gif');
+
 
   /* rectMode(CENTER);
   textAlign(CENTER); */
 
-  playerSprite = createSprite(/* width/2, height/2,30,30 */3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
+  playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
+
   playerSprite.addAnimation("p_up", playerUp);
   playerSprite.addAnimation("p_right", playerRight);
   playerSprite.addAnimation("p_down", playerDown);
@@ -121,6 +137,17 @@ function setup() {
   setSpikes();
   setSolids();
 
+  this.bonusCoins = [
+      
+    new BonusCoin(2.5 * tileSize + xoff, 4.4 * tileSize + yoff),
+    new BonusCoin(2.5 * tileSize + xoff, 6.5 * tileSize + yoff),
+    new BonusCoin(10.5 * tileSize + xoff, 3.5 * tileSize + yoff),
+    //new BonusCoin(5.5 * tileSize + xoff, 4.5 * tileSize + yoff),
+   
+  ];
+
+  
+
   p = new Player();
 
   setDots();
@@ -131,7 +158,7 @@ function setup() {
 
   testPopulation = new Population(populationSize);
   //img = loadImage("https://i.imgur.com/QZf0d6r.gif");
-  img = loadImage("https://imgur.com/u4uRPnB");
+  //img = loadImage("https://imgur.com/u4uRPnB");
 
 
 
@@ -162,7 +189,11 @@ function draw() {
   showedCoin = false;
   background(32, 89, 155);
   drawTiles();
-  writeShit(); 
+  writeShit();
+  for (var bonusCoinsNum = 0; bonusCoinsNum < this.bonusCoins.length; bonusCoinsNum++) {
+    this.bonusCoins[bonusCoinsNum].show();
+    
+  }
 
 
   /* if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
@@ -187,41 +218,43 @@ function draw() {
   } */
 
   if (humanPlaying) {//if the user is controlling the square
-    if ((p.dead && p.fadeCounter<=0) || p.reachedGoal) {
+    if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
       //reset player and dots
-      if(p.reachedGoal){
+      if (p.reachedGoal) {
         winCounter = 100;
- 
+
       }
       p = new Player();
       p.human = true;
       resetDots();
- 
+      resetBonusCoins();
+
     } else {
       //update the dots and the players and show them to the screen
- 
- 
+
+
       moveAndShowDots();
- 
+
       p.update();
       p.show();
     }
   } else
     if (replayGens) {//if replaying the best generations
-      if ((genPlayer.dead && genPlayer.fadeCounter <=0) || genPlayer.reachedGoal) { //if the current gen is done
-        upToGenPos ++;//next gen
+      if ((genPlayer.dead && genPlayer.fadeCounter <= 0) || genPlayer.reachedGoal) { //if the current gen is done
+        upToGenPos++;//next gen
         if (testPopulation.genPlayers.length <= upToGenPos) {//if reached the final gen
           //stop replaying gens
           upToGenPos = 0;
           replayGens = false;
           //return the dots to their saved position
- 
+
           loadDots();
         } else {//if there are more generations to show
           //set gen player as the best player of that generation
           genPlayer = testPopulation.genPlayers[upToGenPos].gimmeBaby();
           //reset the dots positions
           resetDots();
+          resetBonusCoins();
         }
       } else {//if not done
         //move and show dots
@@ -237,35 +270,36 @@ function draw() {
         testPopulation.naturalSelection();
         testPopulation.mutateDemBabies();
         //reset dots
-       resetDots();
- 
+        resetDots();
+        resetBonusCoins();
+
         //every 5 generations incease the number of moves by 5
-        if (testPopulation.gen % increaseEvery ==0) {
+        if (testPopulation.gen % increaseEvery == 0) {
           testPopulation.increaseMoves();
         }
- 
+
       } else {
- 
+
         // moveAndShowDots();
         //update and show population
- 
-        for(var j = 0 ; j< evolutionSpeed; j++){
-          for (var i = 0; i < dots.length; i ++) {
+
+        for (var j = 0; j < evolutionSpeed; j++) {
+          for (var i = 0; i < dots.length; i++) {
             dots[i].move();
           }
           testPopulation.update();
         }
- 
-        for (var i = 0; i < dots.length; i ++) {
+
+        for (var i = 0; i < dots.length; i++) {
           dots[i].show();
         }
         testPopulation.show();
       }
 
 
-  
 
-  KeyPressedSprite();
+
+  //KeyPressedSprite();
   //drawSprites();
 
 
@@ -317,6 +351,13 @@ function resetDots() {
 
 }
 
+function resetBonusCoins() {
+  for (var i = 0; i < bonusCoins.length; i++) {
+    bonusCoins[i].resetBonus();
+  }
+
+}
+
 function loadDots() {
   for (var i = 0; i < dots.length; i++) {
     dots[i] = savedDots[i].clone();
@@ -329,31 +370,32 @@ function saveDots() {
   }
 }
 
-function writeShit(){
+function writeShit() {
 
   fill(247, 247, 255);
   textSize(20);
   noStroke();
-  text(" \tPress P to play the game yourself \t\t\t\t\t\t\t\t Press G to replay evolution highlights",250,920 );
-  text("Press SPACE to only show the best player", 450,980);
-  textSize(36);
-  if(winCounter > 0){
+  text(" \tPress P to play the game yourself \t\t\t\t\t\t\t\t Press G to replay evolution highlights", 370, 720);
+  text(" Bonus coin counter: " + bonusCounter, 1170, 120);
+  text("Press SPACE to only show the best player", 570, 760);
 
-    if(flip){
+  if (winCounter > 0) {
+
+    /* if (flip) {
       push();
 
-      scale(-1.0,1.0);
-      image(img,-300 -img.width + random(5),100+ random(5));
+      scale(-1.0, 1.0);
+      image(img6, -300 - img.width + random(5), 100 + random(5));
       pop();
-    }else{
-    image(img,300+ random(5),100 + random(5));
-    }
+    } else {
+      image(img6, 300 + random(5), 100 + random(5));
+    } */
     textSize(100);
     stroke(0);
 
-    text("YEEESSSSSSSIIIIIIRRRRRRRR", 110,400);
-    winCounter --;
-    if(winCounter % 10 ==0){
+    text("YEEESSSSSSSIIIIIIRRRRRRRR", 110, 400);
+    winCounter--;
+    if (winCounter % 10 == 0) {
 
       flip = !flip;
     }
@@ -361,22 +403,53 @@ function writeShit(){
     noStroke();
   }
   if (replayGens) {
+    fill(247, 247, 255);
+    image(img4, 100, 40, img.width / 2, img.height / 2);
+    textSize(20);
+    text("Exit Highlights", 110, 165);
+    textSize(25);
     fill(0, 0, 0);
     text("Generation: " + genPlayer.gen, 395, 85);
     text("Number of moves: " + genPlayer.brain.directions.length, 840, 85);
-  } else if(!humanPlaying) {
+  } else if (!humanPlaying) {
+    fill(247, 247, 255);
     textSize(25);
-    fill(0, 0, 0);
-    text("Generation: " + testPopulation.gen, 395, 85);
-    if(testPopulation.solutionFound){
-      text("Wins in " + testPopulation.minStep + " moves",840, 85);
-    }else{
+    text("Controls:", 120, 80)
+    textSize(20);
+    text("View population or best player", 30, 220)
+    image(img5, 70, 110, img.width/1.5 , img.height/3);
+    image(img3, 10, 235, img.width / 2, img.height / 2);
+    textSize(20);
+    text("Control Monty\n (Play Game)", 20, 360)
+    image(img4, 170, 235, img.width / 2, img.height / 2);
+    text("Replay Evolution\n     Highlights", 170, 360)
+
+    if (testPopulation.solutionFound) {
+      textSize(25);
+      fill(0, 0, 0);
+      text("Wins in " + testPopulation.minStep + " moves", 850, 85);
+    } else {
+      textSize(25);
+      fill(0, 0, 0);
+      text("Generation: " + testPopulation.gen, 395, 85);
       text("Number of moves: " + testPopulation.players[0].brain.directions.length, 840, 85);
     }
-  }else{
+  } else {
     fill(0, 0, 0);
     textSize(25);
-    text("Solo Gameplay", 660,85);
+    text("Solo Gameplay", 660, 85);
+    fill(247, 247, 255);
+    textSize(25);
+    text("Controls:", 120, 80)
+    textSize(20);
+    text("Player movement", 90, 250)
+    image(img, 10, 110, img.width / 2, img.height / 2);
+    image(img2, 190, 110, img.width / 2, img.height / 2);
+    textSize(90);
+    text("/", 160, 190)
+    image(img3, 100, 235, img.width / 2, img.height / 2);
+    textSize(20);
+    text("Initiate A.I.", 120, 370)
   }
 }
 
@@ -426,45 +499,47 @@ function keyPressed() {
         break;
     }
     setPlayerVelocity();
-  }else{//if human is not playing
-    switch(key) {
-    case ' ':
-      showBest = !showBest;
-      break;
-    case 'g'://replay gens
-      if (replayGens) {
-        upToGenPos = 0;
-        replayGens = false;
-        loadDots();
-      } else
-        if (testPopulation.genPlayers.length > 0) {
-          replayGens = true;
-          genPlayer = testPopulation.genPlayers[0].gimmeBaby();
-          saveDots();
-          resetDots();
-        }
-      break;
+  } else {//if human is not playing
+    switch (key) {
+      case ' ':
+        showBest = !showBest;
+        break;
+      case 'g'://replay gens
+        if (replayGens) {
+          upToGenPos = 0;
+          replayGens = false;
+          loadDots();
+        } else
+          if (testPopulation.genPlayers.length > 0) {
+            replayGens = true;
+            genPlayer = testPopulation.genPlayers[0].gimmeBaby();
+            saveDots();
+            resetDots();
+            resetBonusCoins();
+          }
+        break;
     }
   }
 
-  if(key == 'p'){
+  if (key == 'p') {
     if (humanPlaying) {//if human is currently playing
-  
-     //reset dots to position
-     humanPlaying = false;
-     loadDots();
-   } else {//if AI is currently playing
-     if (replayGens) {
-       upToGenPos = 0;
-       replayGens = false;
-     }
-     humanPlaying = true;
-     p = new Player();
-     p.human = true;
-     //save the positions of the dots
-     saveDots();
-     resetDots();
-   }
+
+      //reset dots to position
+      humanPlaying = false;
+      loadDots();
+    } else {//if AI is currently playing
+      if (replayGens) {
+        upToGenPos = 0;
+        replayGens = false;
+      }
+      humanPlaying = true;
+      p = new Player();
+      p.human = true;
+      //save the positions of the dots
+      saveDots();
+      resetDots();
+      resetBonusCoins();
+    }
   }
 }
 
@@ -543,24 +618,24 @@ function setPlayerVelocity() {
 function KeyPressedSprite() {
   playerSprite.animation.stop();
   if (keyIsDown(UP_ARROW)) {
-    playerSprite.position.y -= 3.4;
+    playerSprite.position.y -= 1;
     playerSprite.changeAnimation("p_up");
     playerSprite.animation.play();
 
   }
   if (keyIsDown(DOWN_ARROW)) {
-    playerSprite.position.y += 3.4;
+    playerSprite.position.y += 1;
     playerSprite.changeAnimation("p_down");
     playerSprite.animation.play();
   }
   if (keyIsDown(RIGHT_ARROW)) {
-    playerSprite.position.x += 3.4;
+    playerSprite.position.x += 1;
     playerSprite.changeAnimation("p_right");
     playerSprite.animation.play();
 
   }
   if (keyIsDown(LEFT_ARROW)) {
-    playerSprite.position.x -= 3.4;
+    playerSprite.position.x -= 1;
     playerSprite.changeAnimation("p_left");
     playerSprite.animation.play();
   }

@@ -358,6 +358,10 @@ function resetBonusCoins() {
 
 }
 
+function sign(x) {
+  return typeof x === 'number' ? x ? x < 0 ? -1 : 1 : x === x ? 0 : NaN : NaN;
+}
+
 function loadDots() {
   for (var i = 0; i < dots.length; i++) {
     dots[i] = savedDots[i].clone();
@@ -373,10 +377,10 @@ function saveDots() {
 function writeShit() {
 
   fill(247, 247, 255);
-  textSize(20);
+  textSize(25);
   noStroke();
   text(" \tPress P to play the game yourself \t\t\t\t\t\t\t\t Press G to replay evolution highlights", 370, 720);
-  text(" Bonus coin counter: " + bonusCounter, 1170, 120);
+  
   text("Press SPACE to only show the best player", 570, 760);
 
   if (winCounter > 0) {
@@ -438,6 +442,8 @@ function writeShit() {
     fill(0, 0, 0);
     textSize(25);
     text("Solo Gameplay", 660, 85);
+    fill(247, 247, 255);
+    text(" Bonus coin counter: " + bonusCounter, 60, 450);
     fill(247, 247, 255);
     textSize(25);
     text("Controls:", 120, 80)

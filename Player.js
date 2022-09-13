@@ -102,7 +102,7 @@ class Player {
 
 
     //playerSprite = createSprite(/* width/2, height/2,30,30 */30, 30, tileSize / 5, tileSize / 5);
-    //drawSprites();
+    drawSprites();
 
      
     for (var coinNum = 0; coinNum < this.coins.length; coinNum++) {

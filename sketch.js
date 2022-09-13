@@ -13,7 +13,7 @@ var tileSize = 50;
 var xoff = 300;
 var yoff = 50;
 
-var humanPlaying = false;
+var humanPlaying = true;
 
 var showBest = true;
 
@@ -151,7 +151,7 @@ function setup() {
   p = new Player();
 
   setDots();
-  KeyPressedSprite();
+  //KeyPressedSprite();
   //p.human = true;
 
   winArea = new Solid(tiles[14][8], tiles[16][8]);
@@ -224,15 +224,17 @@ function draw() {
         winCounter = 100;
 
       }
+      //drawSprites();
       p = new Player();
       p.human = true;
+      
       resetDots();
       resetBonusCoins();
 
     } else {
       //update the dots and the players and show them to the screen
 
-
+      drawSprites();
       moveAndShowDots();
 
       p.update();
@@ -595,12 +597,16 @@ function setPlayerVelocity() {
   p.vel.y = 0;
   if (up) {
     p.vel.y -= 1;
+    playerSprite.changeAnimation("p_up");
+    playerSprite.animation.play();
     /* playerSprite.position.y -= 30;
     playerSprite.changeAnimation("p_up");
     playerSprite.animation.play(); */
   }
   if (down) {
     p.vel.y += 1;
+    playerSprite.changeAnimation("p_down");
+    playerSprite.animation.play();
     /* playerSprite.position.y += 30;
     playerSprite.changeAnimation("p_down");
     playerSprite.animation.play(); */
@@ -608,12 +614,16 @@ function setPlayerVelocity() {
   p.vel.x = 0;
   if (left) {
     p.vel.x -= 1;
+    playerSprite.changeAnimation("p_left");
+    playerSprite.animation.play();
     /* playerSprite.position.x -= 30;
     playerSprite.changeAnimation("p_left");
     playerSprite.animation.play(); */
   }
   if (right) {
     p.vel.x += 1;
+    playerSprite.changeAnimation("p_right");
+    playerSprite.animation.play();
     /* playerSprite.position.x += 30;
     playerSprite.changeAnimation("p_right");
     playerSprite.animation.play(); */

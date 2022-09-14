@@ -1,7 +1,8 @@
 class Player {
   constructor() {
     //this.pos = createVector(3*tileSize + xoff,4* tileSize + yoff);
-    this.pos = createVector(3.1 * tileSize + xoff, 2.2 * tileSize + yoff);
+    //this.playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
+    this.pos = createVector(2.9 * tileSize + xoff, 2.2 * tileSize + yoff);
     this.vel = createVector(0, 0);
     this.size = tileSize / 2.0;
     this.playerSpeed = tileSize / 15.0;
@@ -18,6 +19,7 @@ class Player {
     this.fading = false;
     this.brain = new Brain(numberOfSteps);
     this.human = false;
+    
     /* this.playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
     playerSprite.addAnimation("p_up", playerUp);
     playerSprite.addAnimation("p_right", playerRight);
@@ -94,17 +96,38 @@ class Player {
       fill(255, 0, 0, this.fadeCounter);
     } */
 
-     stroke(0, 0, 0, this.fadeCounter);
-     strokeWeight(4);
-     rect(this.pos.x, this.pos.y, this.size, this.size);
-     //rect(xoff, yoff, 200, 200);
-     stroke(0);
+    /* stroke(0, 0, 0, this.fadeCounter);
+    strokeWeight(4);
+    rect(this.pos.x, this.pos.y, this.size, this.size);
+    //rect(xoff, yoff, 200, 200);
+    stroke(0); */
+
+    
+
+    //drawSprites();
 
 
     //playerSprite = createSprite(/* width/2, height/2,30,30 */30, 30, tileSize / 5, tileSize / 5);
-    drawSprites();
+    if (humanPlaying) {
+      //resetSketch();
+      drawSprites();
+      stroke(0, 0, 0, this.fadeCounter);
+      strokeWeight(4);
+      rect(this.pos.x, this.pos.y, this.size, this.size);
+      //rect(xoff, yoff, 200, 200);
+      stroke(0);
+    
+    } else {
+      playerSprite.remove()
+      stroke(0, 0, 0, this.fadeCounter);
+      strokeWeight(4);
+      rect(this.pos.x, this.pos.y, this.size, this.size);
+      //rect(xoff, yoff, 200, 200);
+      stroke(0);
+    }
 
-     
+
+
     for (var coinNum = 0; coinNum < this.coins.length; coinNum++) {
       this.coins[coinNum].show();
     }
@@ -113,7 +136,7 @@ class Player {
       this.bonusCoins[bonusCoinsNum].show();
       
     } */
-    
+
   }
 
   move() {
@@ -125,6 +148,9 @@ class Player {
         } else {//if at the end of the directions array then the player is dead
           this.dead = true;
           this.fading = true;
+
+          //playerSprite.remove()
+          
         }
         this.moveCount = 6;
       } else {
@@ -133,7 +159,7 @@ class Player {
     }
     //KeyPressedSprite();
     var temp = createVector(this.vel.x, this.vel.y);
-    
+
 
     temp.normalize();
     temp.mult(this.playerSpeed);
@@ -141,6 +167,7 @@ class Player {
       temp = solids[i].restrictMovement(this.pos, createVector(this.pos.x + this.size, this.pos.y + this.size), temp);
     }
     this.pos.add(temp);
+    
 
     var temp2 = createVector(this.vel.x, this.vel.y);
 
@@ -149,10 +176,10 @@ class Player {
     for (var i = 0; i < solids.length; i++) {
       temp2 = solids[i].restrictMovement(playerSprite.position, createVector(playerSprite.position.x + this.size, playerSprite.position.y + this.size), temp2);
     }
-    
+
     playerSprite.position.add(temp2);
 
-    
+
 
   }
 
@@ -177,6 +204,11 @@ class Player {
         this.dead = true;
         this.deathByDot = true;
         this.deathAtStep = this.brain.step;
+        if (humanPlaying) {
+          playerSprite.remove()
+          resetSketch()
+        }
+
       }
 
     }
@@ -186,6 +218,10 @@ class Player {
         this.dead = true;
         this.deathByDot = true;
         this.deathAtStep = this.brain.step;
+        if (humanPlaying) {
+          playerSprite.remove()
+          resetSketch()
+        } 
       }
 
     }
@@ -201,6 +237,10 @@ class Player {
 
     if (winArea.collision(this.pos, createVector(this.pos.x + this.size, this.pos.y + this.size))) {
       this.reachedGoal = true;
+      if (humanPlaying) {
+        playerSprite.remove()
+        resetSketch()
+      }
     }
 
   }

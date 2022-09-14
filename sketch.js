@@ -114,12 +114,8 @@ function setup() {
   /* rectMode(CENTER);
   textAlign(CENTER); */
 
-  playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
 
-  playerSprite.addAnimation("p_up", playerUp);
-  playerSprite.addAnimation("p_right", playerRight);
-  playerSprite.addAnimation("p_down", playerDown);
-  playerSprite.addAnimation("p_left", playerLeft);
+
 
 
   for (var i = 0; i < 21; i++) {
@@ -138,17 +134,21 @@ function setup() {
   setSolids();
 
   this.bonusCoins = [
-      
+
     new BonusCoin(2.5 * tileSize + xoff, 4.4 * tileSize + yoff),
     new BonusCoin(2.5 * tileSize + xoff, 6.5 * tileSize + yoff),
     new BonusCoin(10.5 * tileSize + xoff, 3.5 * tileSize + yoff),
     //new BonusCoin(5.5 * tileSize + xoff, 4.5 * tileSize + yoff),
-   
+
   ];
 
-  
+
 
   p = new Player();
+
+  if (humanPlaying) {
+    resetSketch();
+  }
 
   setDots();
   //KeyPressedSprite();
@@ -173,6 +173,17 @@ function setup() {
   }, false);
 }
 
+function resetSketch() {
+
+  playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
+
+  playerSprite.addAnimation("p_up", playerUp);
+  playerSprite.addAnimation("p_right", playerRight);
+  playerSprite.addAnimation("p_down", playerDown);
+  playerSprite.addAnimation("p_left", playerLeft);
+
+}
+
 
 
 function draw() {
@@ -192,7 +203,7 @@ function draw() {
   writeShit();
   for (var bonusCoinsNum = 0; bonusCoinsNum < this.bonusCoins.length; bonusCoinsNum++) {
     this.bonusCoins[bonusCoinsNum].show();
-    
+
   }
 
 
@@ -228,6 +239,8 @@ function draw() {
       p = new Player();
       p.human = true;
       
+      playerSprite.remove()
+      resetSketch();
       resetDots();
       resetBonusCoins();
 
@@ -241,6 +254,8 @@ function draw() {
       p.show();
     }
   } else
+  
+
     if (replayGens) {//if replaying the best generations
       if ((genPlayer.dead && genPlayer.fadeCounter <= 0) || genPlayer.reachedGoal) { //if the current gen is done
         upToGenPos++;//next gen
@@ -382,7 +397,7 @@ function writeShit() {
   textSize(25);
   noStroke();
   text(" \tPress P to play the game yourself \t\t\t\t\t\t\t\t Press G to replay evolution highlights", 370, 720);
-  
+
   text("Press SPACE to only show the best player", 570, 760);
 
   if (winCounter > 0) {
@@ -423,7 +438,7 @@ function writeShit() {
     text("Controls:", 120, 80)
     textSize(20);
     text("View population or best player", 30, 220)
-    image(img5, 70, 110, img.width/1.5 , img.height/3);
+    image(img5, 70, 110, img.width / 1.5, img.height / 3);
     image(img3, 10, 235, img.width / 2, img.height / 2);
     textSize(20);
     text("Control Monty\n (Play Game)", 20, 360)
@@ -535,6 +550,7 @@ function keyPressed() {
       //reset dots to position
       humanPlaying = false;
       loadDots();
+      
     } else {//if AI is currently playing
       if (replayGens) {
         upToGenPos = 0;
@@ -543,10 +559,12 @@ function keyPressed() {
       humanPlaying = true;
       p = new Player();
       p.human = true;
+
       //save the positions of the dots
       saveDots();
       resetDots();
       resetBonusCoins();
+      resetSketch();
     }
   }
 }

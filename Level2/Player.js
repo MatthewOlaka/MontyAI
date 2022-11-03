@@ -111,11 +111,11 @@ class Player {
     if (humanPlaying) {
       //resetSketch();
       drawSprites();
-      /* stroke(0, 0, 0, this.fadeCounter);
+      stroke(0, 0, 0, this.fadeCounter);
       strokeWeight(4);
       rect(this.pos.x, this.pos.y, this.size, this.size);
       //rect(xoff, yoff, 200, 200);
-      stroke(0); */
+      stroke(0);
     
     } else {
 

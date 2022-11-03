@@ -9,7 +9,7 @@ var up = false;
 var down = false;
 var p;
 
-var tileSize = 50;
+var tileSize = 40;
 var xoff = 300;
 var yoff = 50;
 
@@ -99,7 +99,6 @@ function preload() {
   playerRight = loadAnimation("Images/Player/p_right1.png", "Images/Player/p_right2.png", "Images/Player/p_right3.png");
   playerDown = loadAnimation("Images/Player/p_down1.png", "Images/Player/p_down2.png", "Images/Player/p_down3.png");
   playerLeft = loadAnimation("Images/Player/p_left1.png", "Images/Player/p_left2.png", "Images/Player/p_left3.png");
-
   girl = loadAnimation("Images/Babe/girl.png","Images/Babe/girl2.png","Images/Babe/girl2.png", "Images/Babe/girl2.png", "Images/Babe/girl.png","Images/Babe/girl.png","Images/Babe/girl.png","Images/Babe/girl.png","Images/Babe/girl3.png", "Images/Babe/girl3.png","Images/Babe/girl3.png");
 }
 
@@ -119,10 +118,10 @@ function setup() {
 
 
 
-
-  for (var i = 0; i < 21; i++) {
+  //Set the Tiles 
+  for (var i = 0; i < 24; i++) {
     tiles[i] = [];
-    for (var j = 0; j < 12; j++) {
+    for (var j = 0; j < 16; j++) {
       tiles[i][j] = new Tile(i, j);
     }
   }
@@ -144,8 +143,6 @@ function setup() {
 
   ];
 
-
-
   p = new Player();
 
   if (humanPlaying) {
@@ -159,11 +156,6 @@ function setup() {
   winArea = new Solid(tiles[13][9], tiles[16][9]);
 
   testPopulation = new Population(populationSize);
-  //img = loadImage("https://i.imgur.com/QZf0d6r.gif");
-  //img = loadImage("https://imgur.com/u4uRPnB");
-
-
-
 
 
   //prevents the window from moving from the arrow keys or the spacebar
@@ -191,43 +183,9 @@ function resetSketch() {
 
 }
 
-/* function resetGirlSketch() {
-
-
-
-  girlSprite = createSprite(13.7 * tileSize + xoff, 9.9 * tileSize + yoff, tileSize / 5, tileSize / 5);
-
-
-  girlSprite.addAnimation("girlSketch", girl);
-  girlSprite.changeAnimation("girlSketch");
-  girlSprite.animation.play();
-
-  
-
-} */
-
-
-
-
-
-
 
 function draw() {
 
-
-
-  
-  //background(200)
-  //rect(50, 50, 1000, 1000);
-
-  //fill(100,200,95)
-  //circle(xpos, ypos, 35);
-
-  /*  if (stage == 0) {
-       game();
-       
-   } */
-  //resetGirlSketch()
   showedCoin = false;
   background(32, 89, 155);
   drawTiles();
@@ -236,28 +194,6 @@ function draw() {
     this.bonusCoins[bonusCoinsNum].show();
 
   }
-
-
-  /* if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
-    //reset player and dots
-    if (p.reachedGoal) {
-      winCounter = 100;
-
-    }
-    p = new Player();
-    p.human = true;
-    resetDots();
-
-  } else {
-    //update the dots and the players and show them to the screen
-
-
-    moveAndShowDots();
-
-    p.update();
-    p.show();
-
-  } */
 
   if (humanPlaying) {//if the user is controlling the square
     if ((p.dead && p.fadeCounter <= 0) || p.reachedGoal) {
@@ -344,27 +280,9 @@ function draw() {
         testPopulation.show();
       }
 
-
-
-
-  //KeyPressedSprite();
-  //drawSprites();
-
-
 }
 
-/* function game() {
-    background(150, 230, 240);
 
-    //window frame
-    //noFill();
-    fill(179, 180, 182)
-    stroke(0);
-    strokeWeight(5);
-    rect(width / 3.5, height / 4.5, width / 3, height / 4)
-
-
-} */
 
 function drawTiles() {
   for (var i = 1; i < tiles.length - 4; i++) {
@@ -514,28 +432,16 @@ function keyPressed() {
     switch (keyCode) {
       case UP_ARROW:
         up = true;
-        /* playerSprite.position.y -= 30;
-        playerSprite.changeAnimation("p_up");
-        playerSprite.animation.play(); */
 
         break;
       case DOWN_ARROW:
         down = true;
-        /* playerSprite.position.y += 30;
-        playerSprite.changeAnimation("p_down");
-        playerSprite.animation.play(); */
         break;
       case RIGHT_ARROW:
         right = true;
-        /* playerSprite.position.x += 30;
-        playerSprite.changeAnimation("p_right");
-        playerSprite.animation.play(); */
         break;
       case LEFT_ARROW:
         left = true;
-        /* playerSprite.position.x -= 30;
-        playerSprite.changeAnimation("p_left");
-        playerSprite.animation.play(); */
         break;
     }
     switch (key) {
@@ -648,60 +554,27 @@ function setPlayerVelocity() {
     p.vel.y -= 1;
     playerSprite.changeAnimation("p_up");
     playerSprite.animation.play();
-    /* playerSprite.position.y -= 30;
-    playerSprite.changeAnimation("p_up");
-    playerSprite.animation.play(); */
+    
   }
   if (down) {
     p.vel.y += 1;
     playerSprite.changeAnimation("p_down");
     playerSprite.animation.play();
-    /* playerSprite.position.y += 30;
-    playerSprite.changeAnimation("p_down");
-    playerSprite.animation.play(); */
+   
   }
   p.vel.x = 0;
   if (left) {
     p.vel.x -= 1;
     playerSprite.changeAnimation("p_left");
     playerSprite.animation.play();
-    /* playerSprite.position.x -= 30;
-    playerSprite.changeAnimation("p_left");
-    playerSprite.animation.play(); */
+ 
   }
   if (right) {
     p.vel.x += 1;
     playerSprite.changeAnimation("p_right");
     playerSprite.animation.play();
-    /* playerSprite.position.x += 30;
-    playerSprite.changeAnimation("p_right");
-    playerSprite.animation.play(); */
+   
   }
 
 }
 
-/* function KeyPressedSprite() {
-  playerSprite.animation.stop();
-  if (keyIsDown(UP_ARROW)) {
-    playerSprite.position.y -= 1;
-    playerSprite.changeAnimation("p_up");
-    playerSprite.animation.play();
-
-  }
-  if (keyIsDown(DOWN_ARROW)) {
-    playerSprite.position.y += 1;
-    playerSprite.changeAnimation("p_down");
-    playerSprite.animation.play();
-  }
-  if (keyIsDown(RIGHT_ARROW)) {
-    playerSprite.position.x += 1;
-    playerSprite.changeAnimation("p_right");
-    playerSprite.animation.play();
-
-  }
-  if (keyIsDown(LEFT_ARROW)) {
-    playerSprite.position.x -= 1;
-    playerSprite.changeAnimation("p_left");
-    playerSprite.animation.play();
-  }
-} */

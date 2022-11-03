@@ -52,53 +52,116 @@ function setLevel1SafeArea() {
 }
 
 function setSpikes() { 
-  /* //tiles[6][7].spikes.push(2);
-  //tiles[7][7].spikes.push(2);
-  //tiles[7][7].spikes.push(1);
-  //tiles[7][6].spikes.push(1);
-  //tiles[7][5].spikes.push(1);
-  //tiles[7][5].spikes.push(4);
-  //tiles[6][5].spikes.push(4);
-  //tiles[5][5].spikes.push(4);
-  tiles[5][4].spikes.push(3);
-  //tiles[6][4].spikes.push(2);
-  //tiles[5][4].spikes.push(2);
-  tiles[4][4].spikes.push(1);
-  //tiles[2][4].spikes.push(4);
-  //tiles[3][4].spikes.push(4);
-  //tiles[4][4].spikes.push(4);
-  tiles[2][4].spikes.push(3);
-  tiles[2][5].spikes.push(3);
+
   tiles[2][6].spikes.push(3);
-  tiles[2][6].spikes.push(2);
-  tiles[3][6].spikes.push(2);
-  tiles[2][7].spikes.push(4);
-  tiles[3][7].spikes.push(4);
+  tiles[2][7].spikes.push(3);
+  tiles[2][8].spikes.push(3);
+  tiles[2][9].spikes.push(3);
+  tiles[2][10].spikes.push(3);
+  tiles[2][11].spikes.push(3);
+  tiles[2][12].spikes.push(3);
+  tiles[2][13].spikes.push(3);
+  tiles[2][14].spikes.push(3);
+  tiles[2][14].spikes.push(2);
+  tiles[3][14].spikes.push(2);
+  tiles[3][14].spikes.push(1);
+  tiles[4][14].spikes.push(3);
 
-  tiles[9][1].spikes.push(1);
-  tiles[9][2].spikes.push(1);
-  tiles[9][3].spikes.push(1);
-  tiles[10][3].spikes.push(3);
+  tiles[3][10].spikes.push(1);
+  tiles[4][10].spikes.push(3);
+  tiles[3][11].spikes.push(1);
+  tiles[4][11].spikes.push(3);
 
+  tiles[5][6].spikes.push(1);
+  tiles[6][6].spikes.push(3);
+  tiles[5][9].spikes.push(1);
+  tiles[6][9].spikes.push(3);
+  tiles[5][12].spikes.push(1);
+  tiles[6][12].spikes.push(3);
+  tiles[5][13].spikes.push(1);
+  tiles[6][13].spikes.push(3);
 
-  tiles[11][5].spikes.push(4);
-  tiles[11][4].spikes.push(2);
-  tiles[13][5].spikes.push(4);
-  tiles[14][5].spikes.push(4);
-  tiles[15][5].spikes.push(4);
+  tiles[7][6].spikes.push(1);
+  tiles[8][6].spikes.push(3);
+  tiles[7][7].spikes.push(1);
+  tiles[8][7].spikes.push(3);
+  tiles[7][10].spikes.push(1);
+  tiles[8][10].spikes.push(3);
+  tiles[7][11].spikes.push(1);
+  tiles[8][11].spikes.push(3);
+  tiles[7][12].spikes.push(1);
+  tiles[8][12].spikes.push(3);
+  tiles[7][14].spikes.push(1);
+  tiles[8][14].spikes.push(3);
 
-  tiles[2][10].spikes.push(2);
-  tiles[3][10].spikes.push(2);
-  tiles[4][10].spikes.push(2);
-  tiles[5][10].spikes.push(2);
-  tiles[6][10].spikes.push(2);
-  tiles[7][10].spikes.push(2);
-  tiles[8][10].spikes.push(2);
-  tiles[9][10].spikes.push(2);
-  tiles[10][10].spikes.push(2);
-  tiles[11][10].spikes.push(2);
-  tiles[12][10].spikes.push(2); */
+  tiles[9][12].spikes.push(1);
+  tiles[10][12].spikes.push(3);
+  tiles[9][13].spikes.push(1);
+  tiles[10][13].spikes.push(3);
 
+  tiles[11][10].spikes.push(1);
+  tiles[12][10].spikes.push(3);
+  tiles[11][11].spikes.push(1);
+  tiles[12][11].spikes.push(3);
+  tiles[11][13].spikes.push(1);
+  tiles[12][13].spikes.push(3);
+  tiles[11][14].spikes.push(1);
+  tiles[12][14].spikes.push(3);
+
+  tiles[12][12].spikes.push(4);
+  tiles[12][13].spikes.push(4);
+  tiles[13][12].spikes.push(4);
+  tiles[13][13].spikes.push(4);
+  tiles[14][12].spikes.push(4);
+  tiles[14][13].spikes.push(4);
+
+  tiles[12][11].spikes.push(2);
+  tiles[12][12].spikes.push(2);
+  tiles[13][11].spikes.push(2);
+  tiles[13][12].spikes.push(2);
+  tiles[14][11].spikes.push(2);
+  tiles[14][12].spikes.push(2);
+
+  tiles[14][13].spikes.push(1);
+  tiles[15][13].spikes.push(3);
+  tiles[14][11].spikes.push(1);
+  tiles[15][11].spikes.push(3);
+
+  tiles[14][11].spikes.push(4);
+  tiles[14][14].spikes.push(4);
+  tiles[14][10].spikes.push(2);
+  tiles[14][13].spikes.push(2);
+
+  tiles[14][5].spikes.push(3);
+  tiles[14][6].spikes.push(3);
+  tiles[13][6].spikes.push(1);
+  tiles[14][7].spikes.push(3);
+  tiles[13][7].spikes.push(1);
+
+  tiles[16][7].spikes.push(3);
+  tiles[17][7].spikes.push(3);
+  tiles[15][7].spikes.push(1);
+  tiles[16][7].spikes.push(1);
+
+  tiles[14][7].spikes.push(2);
+  tiles[15][7].spikes.push(2);
+  tiles[17][7].spikes.push(2);
+  tiles[18][7].spikes.push(2);
+
+  tiles[14][8].spikes.push(4);
+  tiles[15][8].spikes.push(4);
+  tiles[17][8].spikes.push(4);
+  tiles[18][8].spikes.push(4);
+
+  tiles[18][7].spikes.push(1);
+  tiles[18][6].spikes.push(1);
+  tiles[18][5].spikes.push(1);
+  tiles[18][4].spikes.push(1);
+  tiles[18][3].spikes.push(1);
+  tiles[18][2].spikes.push(1);
+  tiles[18][1].spikes.push(1);
+
+  
 
 
 }
@@ -188,10 +251,13 @@ function setEdges() {
 
   tiles[14][6].edges.push(3);
   tiles[14][7].edges.push(3);
-  tiles[6][6].edges.push(3);
+  tiles[16][7].edges.push(3);
+  tiles[17][7].edges.push(3);
+
+  /* tiles[6][6].edges.push(3);
   tiles[6][9].edges.push(3);
   tiles[8][6].edges.push(3);
-  tiles[8][7].edges.push(3);
+  tiles[8][7].edges.push(3); */
 
   //3rd Floor
   tiles[4][10].edges.push(3);
@@ -312,11 +378,11 @@ function setDots() {
 
 function setSolids() {
   //solids.push(new Solid(tiles[2][1], tiles[2][11])); 
-  solids.push(new Solid(tiles[2][1], tiles[2][4])); 
-  solids.push(new Solid(tiles[2][7], tiles[2][11]));  // Left boundary.
-  solids.push(new Solid(tiles[2][1], tiles[16][1]));  // Top boundary.
-  solids.push(new Solid(tiles[13][11], tiles[16][11]));  // Bottom boundary.
-  solids.push(new Solid(tiles[16][1], tiles[16][11]));  // Right boundary.
+  //solids.push(new Solid(tiles[2][1], tiles[2][4])); 
+  solids.push(new Solid(tiles[2][1], tiles[2][15]));  // Left boundary.
+  solids.push(new Solid(tiles[2][1], tiles[19][1]));  // Top boundary.
+  solids.push(new Solid(tiles[2][15], tiles[19][15]));  // Bottom boundary.
+  solids.push(new Solid(tiles[19][1], tiles[19][15]));  // Right boundary.
 
   // The vertical inner maze walls.
  // solids.push(new Solid(tiles[10][1], tiles[10][3]));

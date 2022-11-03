@@ -2,7 +2,7 @@ class Player {
   constructor() {
     //this.pos = createVector(3*tileSize + xoff,4* tileSize + yoff);
     //this.playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
-    this.pos = createVector(2.9 * tileSize + xoff, 2.2 * tileSize + yoff);
+    this.pos = createVector(2.8 * tileSize + xoff, 4.9 * tileSize + yoff);
     this.vel = createVector(0, 0);
     this.size = tileSize / 2.0;
     this.playerSpeed = tileSize / 15.0;

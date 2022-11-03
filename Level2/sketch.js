@@ -172,7 +172,7 @@ function setup() {
 
 function resetSketch() {
 
-  playerSprite = createSprite(3.1 * tileSize + xoff, 2.2 * tileSize + yoff, tileSize / 5, tileSize / 5);
+  playerSprite = createSprite(3 * tileSize + xoff, 4.9 * tileSize + yoff, tileSize / 5, tileSize / 5);
 
 
 

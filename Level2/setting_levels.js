@@ -35,14 +35,16 @@ function setLevel1Goal() {
 }
 
 function setLevel1SafeArea() {
-  tiles[2][1].goal = true;
-  tiles[2][2].goal = true;
-  tiles[2][3].goal = true;
-  tiles[3][1].goal = true;
-  tiles[3][2].goal = true;
-  tiles[3][3].goal = true;
+  //tiles[2][1].goal = true;
+  //tiles[2][2].goal = true;
+  //tiles[2][3].goal = true;
+  //tiles[3][1].goal = true;
+  //tiles[3][2].goal = true;
+  //tiles[3][3].goal = true;
   tiles[2][4].goal = true;
   tiles[3][4].goal = true;
+  tiles[2][5].goal = true;
+  tiles[3][5].goal = true;
   //tiles[4][1].goal = true;
   //tiles[4][2].goal = true;
   //tiles[4][3].goal = true;
@@ -52,6 +54,22 @@ function setLevel1SafeArea() {
 }
 
 function setSpikes() { 
+
+  tiles[2][1].spikes.push(3);
+  tiles[2][2].spikes.push(3);
+  tiles[2][3].spikes.push(3);
+  tiles[2][1].spikes.push(4);
+  tiles[3][1].spikes.push(4);
+
+  tiles[3][1].spikes.push(1);
+  tiles[3][2].spikes.push(1);
+  tiles[3][3].spikes.push(1);
+  tiles[4][1].spikes.push(3);
+  tiles[4][2].spikes.push(3);
+  tiles[4][3].spikes.push(3);
+
+  tiles[4][3].spikes.push(2);
+  tiles[4][4].spikes.push(4);
 
   tiles[2][6].spikes.push(3);
   tiles[2][7].spikes.push(3);
@@ -199,8 +217,8 @@ function setEdges() {
   tiles[4][1].edges.push(3);
   tiles[4][2].edges.push(3);
   tiles[4][3].edges.push(3);
-  tiles[4][4].edges.push(3);
-  tiles[4][4].edges.push(2);
+  //tiles[4][4].edges.push(3);
+  tiles[4][3].edges.push(2);
 
   tiles[2][5].edges.push(2);
   tiles[3][5].edges.push(2);
@@ -385,7 +403,8 @@ function setSolids() {
   solids.push(new Solid(tiles[19][1], tiles[19][15]));  // Right boundary.
 
   // The vertical inner maze walls.
- // solids.push(new Solid(tiles[10][1], tiles[10][3]));
+
+  solids.push(new Solid(tiles[4][1], tiles[4][4]));
   //solids.push(new Solid(tiles[10][3], tiles[10][4]));
   /* solids.push(new Solid(tiles[13][3], tiles[13][5]));
   //solids.push(new Solid(tiles[5][4], tiles[5][5]));

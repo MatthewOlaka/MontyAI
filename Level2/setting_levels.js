@@ -150,6 +150,15 @@ function setSpikes() {
   tiles[14][10].spikes.push(2);
   tiles[14][13].spikes.push(2);
 
+  tiles[14][2].spikes.push(3);
+  tiles[14][3].spikes.push(3);
+  tiles[14][4].spikes.push(3);
+  tiles[13][2].spikes.push(1);
+  tiles[13][3].spikes.push(1);
+  tiles[13][4].spikes.push(1);
+  tiles[13][5].spikes.push(1);
+  tiles[14][3].spikes.push(3);
+  tiles[14][4].spikes.push(3);
   tiles[14][5].spikes.push(3);
   tiles[14][6].spikes.push(3);
   tiles[13][6].spikes.push(1);
@@ -397,14 +406,15 @@ function setDots() {
 function setSolids() {
   //solids.push(new Solid(tiles[2][1], tiles[2][11])); 
   //solids.push(new Solid(tiles[2][1], tiles[2][4])); 
-  solids.push(new Solid(tiles[2][1], tiles[2][15]));  // Left boundary.
-  solids.push(new Solid(tiles[2][1], tiles[19][1]));  // Top boundary.
-  solids.push(new Solid(tiles[2][15], tiles[19][15]));  // Bottom boundary.
+  solids.push(new Solid(tiles[2][4], tiles[2][6]));  // Left boundary.
+  solids.push(new Solid(tiles[4][1], tiles[19][1]));  // Top boundary.
+  solids.push(new Solid(tiles[4][15], tiles[19][15]));  // Bottom boundary.
   solids.push(new Solid(tiles[19][1], tiles[19][15]));  // Right boundary.
 
   // The vertical inner maze walls.
 
-  solids.push(new Solid(tiles[4][1], tiles[4][4]));
+  solids.push(new Solid(tiles[16][10], tiles[16][14]));
+  solids.push(new Solid(tiles[17][11], tiles[17][15]));
   //solids.push(new Solid(tiles[10][3], tiles[10][4]));
   /* solids.push(new Solid(tiles[13][3], tiles[13][5]));
   //solids.push(new Solid(tiles[5][4], tiles[5][5]));
@@ -416,6 +426,11 @@ function setSolids() {
   //solids.push(new Solid(tiles[15][1], tiles[15][2]));
 
   // The horizontal inner maze walls.
+
+  solids.push(new Solid(tiles[2][6], tiles[14][6])); 
+  solids.push(new Solid(tiles[14][5], tiles[16][5])); 
+  solids.push(new Solid(tiles[17][5], tiles[19][5])); 
+  solids.push(new Solid(tiles[4][10], tiles[19][10])); 
   /* solids.push(new Solid(tiles[2][4], tiles[5][4]));
   solids.push(new Solid(tiles[5][5], tiles[9][5]));
   solids.push(new Solid(tiles[10][3], tiles[13][3]));

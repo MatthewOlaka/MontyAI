@@ -153,7 +153,7 @@ function setup() {
   //KeyPressedSprite();
   //p.human = true;
 
-  winArea = new Solid(tiles[13][9], tiles[16][9]);
+  winArea = new Solid(tiles[17][13], tiles[19][13]);
 
   testPopulation = new Population(populationSize);
 
@@ -166,7 +166,7 @@ function setup() {
     }
   }, false);
 
-  girlSprite = createSprite(13.7 * tileSize + xoff, 8.9 * tileSize + yoff, tileSize / 5, tileSize / 5);
+  girlSprite = createSprite(18 * tileSize + xoff, 14 * tileSize + yoff, tileSize / 5, tileSize / 5);
   girlSprite.addAnimation("girlSketch", girl);
 }
 

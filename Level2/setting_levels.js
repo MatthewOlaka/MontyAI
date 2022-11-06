@@ -318,7 +318,7 @@ function setEdges() {
   tiles[15][12].edges.push(1);
   tiles[15][13].edges.push(1);
 
-  tiles[16][11].edges.push(1);
+  //tiles[16][11].edges.push(1);
   tiles[16][12].edges.push(1);
   tiles[16][13].edges.push(1);
   tiles[16][14].edges.push(1);
@@ -400,6 +400,41 @@ function setDots() {
   dots.push(new Dot(tiles[8][5], tiles[8][8], 0, 0.6));
   dots.push(new Dot(tiles[2][10], tiles[12][10], 0.7));
   dots.push(new Dot(tiles[11][7], tiles[15][7], 0.6)); */
+
+  //dots.push(new Dot(tiles[4][1], tiles[13][1], -0.6));
+  dots.push(new Dot(tiles[4][2], tiles[13][2], 0.8));
+  dots.push(new Dot(tiles[13][3], tiles[4][3], -0.8));
+  dots.push(new Dot(tiles[4][4], tiles[13][4], 0.8));
+  dots.push(new Dot(tiles[13][5],tiles[4][5], -0.8));
+
+  dots.push(new Dot(tiles[14][2], tiles[18][2], 0.8));
+  dots.push(new Dot( tiles[18][3], tiles[14][3], -0.8));
+
+  dots.push(new Dot(tiles[14][6], tiles[18][6], 1));
+
+  
+  dots.push(new Dot( tiles[9][9], tiles[9][6], 0,-0.6));
+  dots.push(new Dot(tiles[10][6], tiles[10][9], 0, 0.6));
+  dots.push(new Dot( tiles[11][9], tiles[11][6], 0,-0.6));
+  dots.push(new Dot(tiles[12][6], tiles[12][9], 0, 0.6));
+  dots.push(new Dot(tiles[13][9],tiles[13][6],  0, -0.6));
+  
+  dots.push(new Dot(tiles[5][6], tiles[5][9], 0, 0.8));
+  dots.push(new Dot(tiles[4][9],tiles[4][6],  0, -0.8));
+
+  dots.push(new Dot(tiles[4][10], tiles[7][10], 0.8));
+  dots.push(new Dot(tiles[7][11], tiles[4][11], -0.8));
+  dots.push(new Dot(tiles[4][14], tiles[7][14], 0.5));
+
+  dots.push(new Dot(tiles[8][14],tiles[8][10], 0, -0.6));
+  dots.push(new Dot(tiles[9][10], tiles[9][14], 0, 0.6));
+  dots.push(new Dot(tiles[11][10], tiles[11][14], 0, 0.6));
+
+  dots.push(new Dot( tiles[15][14], tiles[15][10], 0, -0.3));
+  dots.push(new Dot(tiles[16][10], tiles[16][14], 0, 0.3));
+  
+
+
 }
 
 
@@ -414,7 +449,7 @@ function setSolids() {
   // The vertical inner maze walls.
 
   solids.push(new Solid(tiles[16][10], tiles[16][14]));
-  solids.push(new Solid(tiles[17][11], tiles[17][15]));
+  solids.push(new Solid(tiles[17][12], tiles[17][15]));
   //solids.push(new Solid(tiles[10][3], tiles[10][4]));
   /* solids.push(new Solid(tiles[13][3], tiles[13][5]));
   //solids.push(new Solid(tiles[5][4], tiles[5][5]));
@@ -427,7 +462,7 @@ function setSolids() {
 
   // The horizontal inner maze walls.
 
-  //solids.push(new Solid(tiles[2][6], tiles[14][6])); 
+  solids.push(new Solid(tiles[2][6], tiles[14][6])); 
   solids.push(new Solid(tiles[14][5], tiles[16][5])); 
   solids.push(new Solid(tiles[17][5], tiles[19][5])); 
   solids.push(new Solid(tiles[4][10], tiles[19][10])); 

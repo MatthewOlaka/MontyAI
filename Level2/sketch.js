@@ -136,9 +136,14 @@ function setup() {
 
   this.bonusCoins = [
 
-    new BonusCoin(2.5 * tileSize + xoff, 4.4 * tileSize + yoff),
-    new BonusCoin(2.5 * tileSize + xoff, 6.5 * tileSize + yoff),
+    new BonusCoin(2.5 * tileSize + xoff, 1.5 * tileSize + yoff),
     new BonusCoin(10.5 * tileSize + xoff, 3.5 * tileSize + yoff),
+    new BonusCoin(15.5 * tileSize + xoff, 7.5 * tileSize + yoff),
+    new BonusCoin(17.5 * tileSize + xoff, 7.5 * tileSize + yoff),
+    new BonusCoin(7.5 * tileSize + xoff, 10.5 * tileSize + yoff),
+    new BonusCoin(14.5 * tileSize + xoff, 11.5 * tileSize + yoff),
+    new BonusCoin(14.5 * tileSize + xoff, 13.5 * tileSize + yoff),
+    
     //new BonusCoin(5.5 * tileSize + xoff, 4.5 * tileSize + yoff),
 
   ];

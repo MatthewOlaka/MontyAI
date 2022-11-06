@@ -28,11 +28,17 @@ class Player {
     //this.setNodes();
 
     this.coins = [
-      new Coin(8.5 * tileSize + xoff, 1.6 * tileSize + yoff),
-      new Coin(8.5 * tileSize + xoff, 4.6 * tileSize + yoff),
-      new Coin(10.5 * tileSize + xoff, 6.5 * tileSize + yoff),
-      new Coin(6.5 * tileSize + xoff, 9.5 * tileSize + yoff),
-      new Coin(15.5 * tileSize + xoff, 6.5 * tileSize + yoff),
+      new Coin(13.5 * tileSize + xoff, 1.6 * tileSize + yoff),
+      new Coin(16.5 * tileSize + xoff, 5 * tileSize + yoff),
+      new Coin(16.5 * tileSize + xoff, 9.5 * tileSize + yoff),
+      new Coin(6.5 * tileSize + xoff, 8 * tileSize + yoff),
+      new Coin(4 * tileSize + xoff, 13 * tileSize + yoff),
+      new Coin(8 * tileSize + xoff, 13 * tileSize + yoff),
+      new Coin(12 * tileSize + xoff, 12.5 * tileSize + yoff),
+      new Coin(16 * tileSize + xoff, 14.5 * tileSize + yoff),
+      new Coin(18.5 * tileSize + xoff, 10.5 * tileSize + yoff),
+
+      //new Coin(15.5 * tileSize + xoff, 6.5 * tileSize + yoff),
       //new Coin(2.5*tileSize+xoff, 3.5*tileSize+yoff),
       //new Coin(4.5*tileSize+xoff, 3.5*tileSize+yoff),
       //new Coin(4.5*tileSize+xoff, 2.5*tileSize+yoff),
@@ -61,11 +67,15 @@ class Player {
     this.nodes[2] = new Node(this.coins[2], false, true);
     this.nodes[3] = new Node(this.coins[3], false, true);
     this.nodes[4] = new Node(this.coins[4], false, true);
-    //this.nodes[5] = new Node(this.coins[5],false,true);
-    //this.nodes[6] = new Node(this.coins[6],false,true);
-    this.nodes[5] = new Node(tiles[15][10], true, false);
-    //this.nodes[6].setDistanceToFinish(this.nodes[7]);
-    //this.nodes[5].setDistanceToFinish(this.nodes[6]);
+    this.nodes[5] = new Node(this.coins[5],false,true);
+    this.nodes[6] = new Node(this.coins[6],false,true);
+    this.nodes[7] = new Node(this.coins[7],false,true);
+    this.nodes[8] = new Node(this.coins[8],false,true);    
+    this.nodes[9] = new Node(tiles[19][15], true, false);
+    this.nodes[8].setDistanceToFinish(this.nodes[9]);
+    this.nodes[7].setDistanceToFinish(this.nodes[8]);
+    this.nodes[6].setDistanceToFinish(this.nodes[7]);
+    this.nodes[5].setDistanceToFinish(this.nodes[6]);
     this.nodes[4].setDistanceToFinish(this.nodes[5]);
     this.nodes[3].setDistanceToFinish(this.nodes[4]);
     this.nodes[2].setDistanceToFinish(this.nodes[3]);

@@ -111,6 +111,8 @@ function setup() {
   img4 = loadImage('Images/g.png');
   img5 = loadImage('Images/space_key_s.png');
   img6 = loadImage('Images/congrats.gif');
+  img7 = loadImage('Images/Player/montydemo.png');
+  img8 = loadImage('Images/Player/legend2.png');
 
 
   /* rectMode(CENTER);
@@ -491,7 +493,7 @@ function writeShit() {
     textSize(25);
     text("Solo Gameplay", 660, 85);
     fill(247, 247, 255);
-    text(" Bonus coin counter: " + bonusCounter, 60, 450);
+    text(" Bonus coin counter: " + bonusCounter, 40, 410);
     fill(247, 247, 255);
     textSize(25);
     text("Controls:", 120, 80)
@@ -504,6 +506,8 @@ function writeShit() {
     image(img3, 100, 235, img.width / 2, img.height / 2);
     textSize(20);
     text("Initiate A.I.", 120, 370)
+    //image(img7, -100, 400, img7.width/6, img7.height/6);
+    image(img8, 10, 450, img8.width/6, img8.height/6);
   }
 }
 

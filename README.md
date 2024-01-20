@@ -8,8 +8,8 @@ These instructions will get you a copy of the project up and running on your loc
 ## Prerequisites
 What things you need to install the software and how to install them
 
-A compatible web browser
-A computer with sufficient resources to run the game
+A compatible web browser.
+A computer with sufficient resources to run the game.
 
 ## Installing
 Clone or download the repository
